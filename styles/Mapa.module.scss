@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    justify-content: center;
+
+    @media (max-width:768px) {
+        padding-bottom: 4rem;
+        height: 70vh;
+    }
+}
+
+.container2 {
+    display: flex;
+    justify-content: center;
+}
+
+.buscador {
+    position: absolute !important;
+    z-index: 1;
+    color: black;
+    margin: 7px auto;
+    width: 70%;
+    height: 40px;
+
+    @media (max-width:768px) {
+        width: 60%;
+    }
+}
+
+.button {
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    justify-content: center;
+    display: block;
+    color: #c7d5e0 ;
+    background: #2a475e;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+    cursor: pointer;
+}

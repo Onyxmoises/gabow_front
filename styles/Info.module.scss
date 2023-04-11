@@ -1,0 +1,38 @@
+.icon {
+    z-index: 4 !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin-left: 10% !important;
+    margin-top: 5px !important;
+    color: black !important;
+
+    @media(max-width:1390px) {
+        margin-left: 40% !important;
+    }
+}
+
+.cont {
+    width: max-content !important;
+    top: 0px !important;
+    z-index: 3 !important;
+    display: grid !important;
+}
+
+.logo {
+    color: black !important;
+    margin-top: 6px !important;
+    font-size: 2rem !important;
+    max-height: 40px !important;
+    z-index: 2 !important;
+
+    @media(max-width:1390px) {
+        color: transparent !important;
+        z-index: 0 !important;
+        font-size: 0 !important;
+    }
+}
+
+.box {
+    text-align: center !important;
+    width: 250px !important;
+}

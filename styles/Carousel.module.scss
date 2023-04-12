@@ -33,3 +33,17 @@
         // top: 0px;
     }
 }
+
+.edi4 {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: 2;
+
+    @media(max-width:1060px) {
+        width: auto;
+        height: 100vh;
+        // position: sticky;
+        // top: 0px;
+    }
+}

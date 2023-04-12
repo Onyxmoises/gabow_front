@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import { Box, IconButton, Typography, Modal, Snackbar } from '@mui/material'
+import { Box, IconButton, Typography, Modal, Snackbar, Switch } from '@mui/material'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import styles from '../styles/Leyenda.module.scss'
 
 import Inicio from './Inicio';
 
-const Ley = (props) => {
-
-    const { tipo } = props.content;
+const Ley = ({ tipo, sen, verSen }) => {
 
     const [open, setOpen] = useState(false);
 
@@ -22,6 +20,7 @@ const Ley = (props) => {
                         <HelpOutlineIcon className={styles.prueba} />
                     </IconButton>
                 </Snackbar>
+
                 <Modal
                     open={open}
                     onClose={() => setOpen(false)}
@@ -58,6 +57,7 @@ const Ley = (props) => {
                         <HelpOutlineIcon className={styles.prueba} />
                     </IconButton>
                 </Snackbar>
+                
                 <Modal
                     open={open}
                     onClose={() => setOpen(false)}
@@ -65,7 +65,9 @@ const Ley = (props) => {
                     <Box className={styles.mo}>
                         <Typography id="modal-modal-title" variant="h6" component="h2" className={styles.text}>
                             Leyenda
+                            <Switch checked={sen} onChange={verSen}/>
                         </Typography>
+
                         <div className={styles.body}>
                             <hr className={styles.di}/>
                             <p>

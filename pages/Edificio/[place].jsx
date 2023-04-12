@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Pagination, Snackbar } from '@mui/material'
 import { useRouter } from 'next/router'
 import Carousel from '../../components/Carousel'
-import Ley from '../../components/Ley'
 import styles from '../../styles/Edificio.module.scss'
 
 const Edificio = () => {
@@ -18,12 +17,11 @@ const Edificio = () => {
     const { place } = router.query
 
     const data = [
-        { label: "PBv2", sr: `/${place}/PB.jpg` },
-        { label: "P3v2", sr: `/${place}/P03.jpg` },
+        { label: "PBv2", sr: `/${place}/PB.jpg`, sv: `/${place}/PB.svg` },
+        { label: "P3v2", sr: `/${place}/P03.jpg`, sv: `/${place}/P03.svg` },
     ]
 
     const dat = data[change - 1];
-    const datSvg = change - 1;
     const nDat = data.length;
 
     const arrowsAcction = (event, value) => {
@@ -38,15 +36,13 @@ const Edificio = () => {
 
     return (
         <>
-            <Carousel sr={dat.sr} sv={datSvg} place={place} onCambio={manejarCambio} />
+            <Carousel sr={dat.sr} sv={dat.sv} place={place} onCambio={manejarCambio} />
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
                     <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} />
                 </div>
             </Snackbar>
-
-            <Ley content={{ tipo: "edi" }} />
         </>
     )
 }

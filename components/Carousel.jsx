@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/Carousel.module.scss'
 import Info from './Info'
+import Ley from './Ley'
 import Buscador from './Buscador'
 
-const Carousel = ({ sr, sv, place, onCambio }) => {
+const Carousel = ({ sr, sv, onCambio }) => {
 
     const [openInfo, setOpenInfo] = useState(false);
     const [room, setRoom] = useState("");
     const [svgCode, setSvgCode] = useState('');
+    const [sen, setSen] = useState(false);
     
     useEffect(() => {
-        fetch(`/${place}/${sv}.svg`)
+        fetch(sv)
             .then(response => response.text())
             .then(data => setSvgCode(data));
     }, [sv]);
 
     const closeInfo = () => {
         setOpenInfo(false);
+    }
+
+    const verSen = () =>{
+        setSen(!sen);
+        console.log(sen);
     }
 
     const handleClick = (event) => {
@@ -38,12 +45,17 @@ const Carousel = ({ sr, sv, place, onCambio }) => {
         <>
             <div className={styles.edi} >
                 <img src={sr} className={styles.edi2} />
-                <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi3} onClick={handleClick} />
+                {sen && (
+                    <img src="/1/sen.png" className={styles.edi3} />
+                )}
+                <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} />
             </div>
 
             <Info openInfo={openInfo} closeInfo={closeInfo} room={room}/>
 
             <Buscador onCambio={onCambio}/>
+
+            <Ley tipo="edi" sen={sen} verSen={verSen}/>
         </>
     )
 }

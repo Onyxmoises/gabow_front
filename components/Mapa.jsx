@@ -85,7 +85,7 @@ const Mapa = () => {
                 </MapContainer>
             </div>
             
-            <Ley content={{tipo: "gen"}}/>
+            <Ley tipo={'gen'}/>
         </>
     )
 }

@@ -18,6 +18,8 @@ const Edificio = () => {
 
     const data = [
         { label: "PBv2", sr: `/${place}/PB.jpg`, sv: `/${place}/PB.svg` },
+        { label: "P1v2", sr: `/${place}/P01.jpg`, sv: `/${place}/P01.svg` },
+        { label: "P2v2", sr: `/${place}/P02.jpg`, sv: `/${place}/P02.svg` },
         { label: "P3v2", sr: `/${place}/P03.jpg`, sv: `/${place}/P03.svg` },
     ]
 

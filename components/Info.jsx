@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Drawer, Box, Typography, IconButton, Grid, Snackbar, useMediaQuery } from "@mui/material"
+import { Drawer, Box, Typography, IconButton, Grid, Snackbar, useMediaQuery, Button } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from '../styles/Info.module.scss'
 
-const Info = ({ openInfo, closeInfo, room }) => {
+const Info = ({ tipo, openInfo, closeInfo, room, nom }) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const isDesktop = useMediaQuery('(min-width:960px)');
@@ -33,13 +33,31 @@ const Info = ({ openInfo, closeInfo, room }) => {
                     </Grid>
                 </Grid>
             </Snackbar>
-            <Drawer anchor={isDesktop ? 'left' : 'bottom'} open={isOpen} onClose={closeAll}>
-                <Box className={styles.box}>
-                    <Typography variant='h6' role='presentation'>
-                        Mensaje de prueba del cuarto {room}
-                    </Typography>
-                </Box>
-            </Drawer>
+            {tipo == "map" &&
+                <Drawer anchor={isDesktop ? 'left' : 'bottom'} open={isOpen} onClose={closeAll}>
+                    <Box className={styles.box}>
+                        <Typography variant='h6' role='presentation'>
+                            {nom}
+                            {room != 0 &&
+                                <Button variant="contained" href={`/Edificio/${room}`} >ir a</Button>
+                            }
+                        </Typography>
+                    </Box>
+                </Drawer>
+            }
+            {tipo == "car" &&
+                <Drawer anchor={isDesktop ? 'left' : 'bottom'} open={isOpen} onClose={closeAll}>
+                    <Box className={styles.box}>
+                        <Typography variant='h6' role='presentation'>
+                            {nom}
+                            {/* {room != 0 &&
+                                <Button variant="contained" href={`/Edificio/${room}`} >ir a</Button>
+                            } */}
+                        </Typography>
+                    </Box>
+                </Drawer>
+            }
+            
         </>
     )
 }

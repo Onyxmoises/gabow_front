@@ -17,10 +17,10 @@ const Edificio = () => {
     const { place } = router.query
 
     const data = [
-        { label: "PBv2", sr: `/${place}/PB.jpg`, sv: `/${place}/PB.svg` },
-        { label: "P1v2", sr: `/${place}/P01.jpg`, sv: `/${place}/P01.svg` },
-        { label: "P2v2", sr: `/${place}/P02.jpg`, sv: `/${place}/P02.svg` },
-        { label: "P3v2", sr: `/${place}/P03.jpg`, sv: `/${place}/P03.svg` },
+        { label: "PB", sr: `/${place}/PB.jpg`, sv: `/${place}/PB.svg` },
+        { label: "P01", sr: `/${place}/P01.jpg`, sv: `/${place}/P01.svg` },
+        { label: "P02", sr: `/${place}/P02.jpg`, sv: `/${place}/P02.svg` },
+        { label: "P03", sr: `/${place}/P03.jpg`, sv: `/${place}/P03.svg` },
     ]
 
     const dat = data[change - 1];
@@ -28,7 +28,7 @@ const Edificio = () => {
 
     const arrowsAcction = (event, value) => {
         console.log(value);
-        setChange(value)
+        setChange(value);
     }
 
     const manejarCambio = (nuevoValor) => {
@@ -36,13 +36,19 @@ const Edificio = () => {
         setChange(nuevoValor);
     };
 
+    const changeLabel = () => {
+        console.log(dat.label);
+        return dat.label;
+    }
+
     return (
         <>
             <Carousel sr={dat.sr} sv={dat.sv} place={place} onCambio={manejarCambio} />
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
-                    <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} />
+                    <p>{dat.label}</p>
+                    <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel}/>
                 </div>
             </Snackbar>
         </>

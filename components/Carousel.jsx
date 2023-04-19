@@ -51,9 +51,9 @@ const Carousel = ({ sr, sv, onCambio }) => {
                 <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} />
             </div>
 
-            <Info openInfo={openInfo} closeInfo={closeInfo} room={room}/>
+            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"car"} nom={room} room={room}/>
 
-            <Buscador onCambio={onCambio}/>
+            {/* <Buscador onCambio={onCambio}/> */}
 
             <Ley tipo="edi" sen={sen} verSen={verSen}/>
         </>

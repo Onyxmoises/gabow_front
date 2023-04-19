@@ -11,7 +11,6 @@ const Ley = ({ tipo, sen, verSen }) => {
 
     if (tipo == "gen") {
         return (
-
             <>
                 <Inicio/>
 
@@ -111,7 +110,6 @@ const Ley = ({ tipo, sen, verSen }) => {
             </>
         )
     }
-
 }
 
 export default Ley

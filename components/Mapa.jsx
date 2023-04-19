@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet'
 import { Icon } from 'leaflet'
 import styles from '../styles/Mapa.module.scss'
 import Select from 'react-select'
 
 import Ley from './Ley'
+import Info from './Info'
 
 // Esta data se saca de la BD
 const data = [
@@ -28,7 +28,6 @@ const data = [
 function icono(type) {
     const icon = new Icon({
         iconUrl: '/icons/' + type + '.png',
-        // iconUrl: '/2hand.png',
         iconSize: [50, 50]
     })
     return icon
@@ -39,20 +38,44 @@ const Mapa = () => {
     const mapRef = useRef();
     const markerRef = useRef();
     
-    const [cord, setCord] = useState([19.472819274952897, -99.14333273147834])
+    const [openInfo, setOpenInfo] = useState(false);
+    const [edi, setEdi] = useState(0);
+    const [nom, setNom] = useState("");
+    const [cord, setCord] = useState([19.472819274952897, -99.14333273147834]);
 
+    
     const cambiar = selectedOption => {
         const mapC = mapRef.current;
+        const inf = selectedOption.id;
+        
+        setOpenInfo(true);
+        setEdi(inf);
+
+        const dat = data[inf - 1];
+        setNom(dat.label);
+
         mapC.flyTo(selectedOption.value, 18, {
             duration: 2
         });
     }
+    
+    const onClick = (e) => {
+        const mapa = mapRef.current;
+        const inf = e.sourceTarget.options.id;
+        
+        setOpenInfo(true);
+        setEdi(inf);
 
-    const onClick=(item)=>{
-        const mapa=mapRef.current;
-        mapa.flyTo(item.latlng,18,{
+        const dat = data[inf - 1];
+        setNom(dat.label);
+
+        mapa.flyTo(e.latlng,18,{
             duration:2
         });
+    }
+
+    const closeInfo = () => {
+        setOpenInfo(false);
     }
 
     return (
@@ -69,23 +92,24 @@ const Mapa = () => {
             {/* MAPA */}
             <div className={styles.container}>
                 <MapContainer ref={mapRef} center={cord} zoom={11} zoomControl={false}>
+
                     <TileLayer
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
+
                     <ZoomControl position='bottomleft'/>
+
                     {data.map((item) => (
-                        <Marker key={item.id} position={item.value} icon={icono(item.type)} eventHandlers={{ click: onClick }}>
-                            <Popup>
-                                {item.label} <br />
-                                <Link href={`/Edificio/${item.id}`}><button type='button' className={styles.button}>Ir a</button></Link>
-                            </Popup>
-                        </Marker>
+                        <Marker key={item.id} id={item.id} position={item.value} icon={icono(item.type)} eventHandlers={{ click: onClick }} />
                     ))}
+
                 </MapContainer>
             </div>
             
             <Ley tipo={'gen'}/>
+
+            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"map"} room={edi} nom={nom}/>
         </>
     )
 }

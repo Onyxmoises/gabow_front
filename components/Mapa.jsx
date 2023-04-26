@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import Head from 'next/head'
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, ZoomControl, } from 'react-leaflet'
+import ResetViewControl from '@20tab/react-leaflet-resetview';
 import { Icon } from 'leaflet'
 import styles from '../styles/Mapa.module.scss'
 import Select from 'react-select'
@@ -100,6 +101,8 @@ const Mapa = () => {
 
                     <ZoomControl position='bottomleft'/>
 
+                    <ResetViewControl position='bottomleft' icon="url(/pointer.png)"/>
+
                     {data.map((item) => (
                         <Marker key={item.id} id={item.id} position={item.value} icon={icono(item.type)} eventHandlers={{ click: onClick }} />
                     ))}
@@ -109,7 +112,7 @@ const Mapa = () => {
             
             <Ley tipo={'gen'}/>
 
-            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"map"} room={edi} nom={nom}/>
+            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"map"} edi={edi} nom={nom}/>
         </>
     )
 }

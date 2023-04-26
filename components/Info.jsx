@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Drawer, Box, Typography, IconButton, Grid, Snackbar, useMediaQuery, Button } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
-import styles from '../styles/Info.module.scss'
+import styles from '../styles/Info.module.scss';
 
-const Info = ({ tipo, openInfo, closeInfo, room, nom }) => {
+import InfoPrincipal from './InfoPrincipal';
+import InfoCarousel from './InfoCarousel';
+
+const Info = ({ tipo, openInfo, closeInfo, edi, nom }) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const isDesktop = useMediaQuery('(min-width:960px)');
@@ -33,31 +36,15 @@ const Info = ({ tipo, openInfo, closeInfo, room, nom }) => {
                     </Grid>
                 </Grid>
             </Snackbar>
-            {tipo == "map" &&
-                <Drawer anchor={isDesktop ? 'left' : 'bottom'} open={isOpen} onClose={closeAll}>
-                    <Box className={styles.box}>
-                        <Typography variant='h6' role='presentation'>
-                            {nom}
-                            {room != 0 &&
-                                <Button variant="contained" href={`/Edificio/${room}`} >ir a</Button>
-                            }
-                        </Typography>
-                    </Box>
-                </Drawer>
-            }
-            {tipo == "car" &&
-                <Drawer anchor={isDesktop ? 'left' : 'bottom'} open={isOpen} onClose={closeAll}>
-                    <Box className={styles.box}>
-                        <Typography variant='h6' role='presentation'>
-                            {nom}
-                            {/* {room != 0 &&
-                                <Button variant="contained" href={`/Edificio/${room}`} >ir a</Button>
-                            } */}
-                        </Typography>
-                    </Box>
-                </Drawer>
-            }
-            
+            <Drawer anchor={isDesktop ? 'left' : 'bottom'} open={isOpen} onClose={closeAll}>
+                {tipo == "map" &&
+                    <InfoPrincipal nom={nom} edi={edi} />
+                }
+                {tipo == "car" &&
+                    <InfoCarousel nom={nom} />
+                }
+            </Drawer>
+
         </>
     )
 }

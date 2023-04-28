@@ -9,8 +9,8 @@
 
 .sna {
     z-index: 2 !important;
-    background-color: #2a475e;
-    border: 2px solid #c7d5e0;
+    background-color: #ffffff;
+    border: 2px solid #2a475e;
     box-shadow: 24;
     width: max-content;
     border-radius: 15px;
@@ -25,18 +25,19 @@
 
 .arrows {
     text-align: center;
+    color: #2a475e;
     
     button {
-        color: #c7d5e0;
+        color: #2a475e;
     }
 
     svg {
         transform: rotate(270deg);
-        color: #c7d5e0;
+        color: #2a475e;
     }
 
     div{
-        color: #c7d5e0;
+        color: #2a475e;
     }
 }
 

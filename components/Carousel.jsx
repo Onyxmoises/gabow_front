@@ -53,7 +53,7 @@ const Carousel = ({ sr, sv, onCambio }) => {
 
             <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"car"} nom={room} room={room}/>
 
-            {/* <Buscador onCambio={onCambio}/> */}
+            <Buscador onCambio={onCambio}/>
 
             <Ley tipo="edi" sen={sen} verSen={verSen}/>
         </>

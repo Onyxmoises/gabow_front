@@ -29,11 +29,6 @@ const Info = ({ tipo, openInfo, closeInfo, edi, nom }) => {
                             <MenuIcon className={styles.icon} />
                         </IconButton>
                     </Grid>
-                    <Grid item>
-                        <div className={styles.cont}>
-                            <h2 className={styles.logo}>GABOW</h2>
-                        </div>
-                    </Grid>
                 </Grid>
             </Snackbar>
             <Drawer anchor={isDesktop ? 'left' : 'bottom'} open={isOpen} onClose={closeAll}>

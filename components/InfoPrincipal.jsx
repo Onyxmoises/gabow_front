@@ -6,8 +6,10 @@ const InfoPrincipal = ({ nom, edi }) => {
     return (
         <>
             <Box className={styles.box}>
+                <Typography variant='h4'>GABOW</Typography>
                 <Typography variant='h6' role='presentation'>
-                    {nom == "" && "Bienvenido a GABOW"}
+                    <hr />
+                    {nom == "" && "Bienvenido"}
                     {nom}
                 </Typography>
                 <Typography variant='h6' role='presentation'>

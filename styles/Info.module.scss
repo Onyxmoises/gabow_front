@@ -16,6 +16,10 @@
     top: 0px !important;
     z-index: 3 !important;
     display: grid !important;
+
+    @media(max-width:1390px) {
+        left: 0px !important;
+    }
 }
 
 .logo {

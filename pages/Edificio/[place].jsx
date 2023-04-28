@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Head from 'next/head'
 import { Pagination, Snackbar } from '@mui/material'
 import { useRouter } from 'next/router'
 import Carousel from '../../components/Carousel'
@@ -43,11 +44,16 @@ const Edificio = () => {
 
     return (
         <>
+            <Head>
+                <title>GABOW</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+
             <Carousel sr={dat.sr} sv={dat.sv} place={place} onCambio={manejarCambio} />
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
-                    <p>{dat.label}</p>
+                    {/* <p>{dat.label}</p> */}
                     <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel}/>
                 </div>
             </Snackbar>

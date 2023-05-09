@@ -4,6 +4,15 @@ import Info from './Info'
 import Ley from './Ley'
 import Buscador from './Buscador'
 
+const options = [
+    { label: "UsosMulit.", id: "Usos_Multiples", piso: "Planta Baja", lugar: 1},
+    { label: "Ciber", id: "Ciber_Batiz", piso: "Planta Baja", lugar: 1 },
+    { label: "Salon 24", id: "Salon_24", piso: "Piso 01", lugar: 2 },
+    { label: "Salon 22", id: "Salon_22", piso: "Piso 01", lugar: 2 },
+    { label: "Laboratorio Nuevas Tecnologias", id: "LNT", piso: "Piso 02", lugar: 3 },
+    { label: "Lab Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
+];
+
 const Carousel = ({ sr, sv, onCambio }) => {
 
     const [openInfo, setOpenInfo] = useState(false);
@@ -23,7 +32,6 @@ const Carousel = ({ sr, sv, onCambio }) => {
 
     const verSen = () =>{
         setSen(!sen);
-        console.log(sen);
     }
 
     const handleClick = (event) => {
@@ -32,7 +40,6 @@ const Carousel = ({ sr, sv, onCambio }) => {
             document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
             const iden = event.target.id;
             setRoom(iden);
-            console.log(iden);
             event.currentTarget.querySelector(`#${iden}`).setAttribute('opacity', '.7');
             event.currentTarget.querySelector(`#${iden}`).setAttribute('fill', '#66c0f4');
             setOpenInfo(true);
@@ -53,7 +60,7 @@ const Carousel = ({ sr, sv, onCambio }) => {
 
             <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"car"} nom={room} room={room}/>
 
-            <Buscador onCambio={onCambio}/>
+            <Buscador onCambio={onCambio} options={options} setOpenInfo={setOpenInfo} setRoom={setRoom} />
 
             <Ley tipo="edi" sen={sen} verSen={verSen}/>
         </>

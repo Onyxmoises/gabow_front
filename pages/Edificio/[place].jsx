@@ -28,17 +28,14 @@ const Edificio = () => {
     const nDat = data.length;
 
     const arrowsAcction = (event, value) => {
-        console.log(value);
         setChange(value);
     }
 
     const manejarCambio = (nuevoValor) => {
-        console.log(nuevoValor);
         setChange(nuevoValor);
     };
 
     const changeLabel = () => {
-        console.log(dat.label);
         return dat.label;
     }
 

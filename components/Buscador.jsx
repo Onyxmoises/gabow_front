@@ -7,30 +7,20 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
 
     const [value, setValue] = useState(null);
 
-    const cInfo = (lugar, label) => new Promise((resolve, reject) => {
-        setTimeout(() => {
-            onCambio(lugar);
-            setRoom(label);
-            resolve();
-        }, 200);
-    });
-
-    const cColor = (id) => new Promise((resolve, reject) => {
-        setTimeout(() => {
-            document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
-            document.querySelector(`#${id}`).setAttribute('opacity', '.7');
-            document.querySelector(`#${id}`).setAttribute('fill', '#66c0f4');
-            resolve();
-        }, 200);
-    });
-
-    const cambio = async (event) => {
-        const lugar = event.lugar;
-        const label = event.label;
+    const manejarCambio = (event) => {
         const id = event.id;
-        await cInfo(lugar, label);
-        await cColor(id);
+        onCambio(event.lugar);
+        setRoom(event.label);
+        setTimeout(() => {
+            colorCambio(id);
+        }, 200);
         setOpenInfo(true);
+    };
+
+    const colorCambio = (id) => {
+        document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
+        document.querySelector(`#${id}`).setAttribute('opacity', '.7');
+        document.querySelector(`#${id}`).setAttribute('fill', '#66c0f4');
     };
 
     return (
@@ -40,7 +30,7 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
                     <Autocomplete
                         value={value}
                         onChange={(event, newValue) => {
-                            cambio(newValue);
+                            manejarCambio(newValue);
                         }}
                         options={options}
                         groupBy={(option) => option.piso}

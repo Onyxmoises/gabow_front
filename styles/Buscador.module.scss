@@ -1,7 +1,7 @@
 $azul: #2a475e;
 $blanco: #fdfdfd;
 
-.sna{
+.sna {
     z-index: 2 !important;
     background-color: $blanco;
     border: 2px solid $azul;
@@ -14,11 +14,19 @@ $blanco: #fdfdfd;
     right: auto !important;
     -webkit-transform: translateX(-50%) !important;
     width: 70%;
+
     @media (max-width:768px) {
         width: 60%;
     }
 }
 
-.sel{
+.sel {
     width: 100%;
+}
+
+.paper {
+
+    div{
+        background-color: #878787;
+    }
 }

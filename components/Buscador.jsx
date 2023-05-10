@@ -4,16 +4,20 @@ import { TextField, Autocomplete, Snackbar } from "@mui/material";
 
 const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
 
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState();
 
     const manejarCambio = (event) => {
-        const id = event.id;
-        onCambio(event.lugar);
-        setRoom(event.label);
-        setTimeout(() => {
-            colorCambio(id);
-        }, 200);
-        setOpenInfo(true);
+        if(event == null){
+
+        }else{
+            const id = event.id;
+            onCambio(event.lugar);
+            setRoom(event.label);
+            setTimeout(() => {
+                colorCambio(id);
+            }, 200);
+            setOpenInfo(true);
+        }
     };
 
     const colorCambio = (id) => {
@@ -28,13 +32,14 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
             <Snackbar open anchorOrigin={{ horizontal: 'center', vertical: 'top' }} className={styles.sna}>
                 <div className={styles.sel}>
                     <Autocomplete
+                        classes={{ paper: styles.paper }}
                         value={value}
                         onChange={(event, newValue) => {
                             manejarCambio(newValue);
                         }}
                         options={options}
                         groupBy={(option) => option.piso}
-                        renderInput={(params) => <TextField {...params} placeholder='Buscar' />}
+                        renderInput={(params) => <TextField {...params} placeholder='Buscar' variant="outlined" />}
                     />
                 </div>
             </Snackbar>

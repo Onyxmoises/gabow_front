@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from '../styles/Buscador.module.scss'
 import { TextField, Autocomplete, Snackbar } from "@mui/material";
-import { resolve } from 'styled-jsx/css';
 
 const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
 
@@ -21,6 +20,7 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
         document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
         document.querySelector(`#${id}`).setAttribute('opacity', '.7');
         document.querySelector(`#${id}`).setAttribute('fill', '#66c0f4');
+        document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
     };
 
     return (

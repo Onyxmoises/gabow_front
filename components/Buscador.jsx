@@ -7,8 +7,8 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
     const [value, setValue] = useState(null);
 
     const manejarCambio = (event) => {
-        onCambio(event.lugar)
         const id = event.id;
+        onCambio(event.lugar)
         setTimeout(colorCambio, 200, id);
         setRoom(event.label);
     };

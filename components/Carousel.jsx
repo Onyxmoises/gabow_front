@@ -5,12 +5,12 @@ import Ley from './Ley'
 import Buscador from './Buscador'
 
 const options = [
-    { label: "UsosMulit.", id: "Usos_Multiples", piso: "Planta Baja", lugar: 1},
-    { label: "Ciber", id: "Ciber_Batiz", piso: "Planta Baja", lugar: 1 },
+    { label: "Usos Mulitiples", id: "Usos_Multiples", piso: "Planta Baja", lugar: 1},
+    { label: "Ciber Batiz", id: "Ciber_Batiz", piso: "Planta Baja", lugar: 1 },
     { label: "Salon 24", id: "Salon_24", piso: "Piso 01", lugar: 2 },
     { label: "Salon 22", id: "Salon_22", piso: "Piso 01", lugar: 2 },
     { label: "Laboratorio Nuevas Tecnologias", id: "LNT", piso: "Piso 02", lugar: 3 },
-    { label: "Lab Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
+    { label: "Laboratorios de Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
 ];
 
 const Carousel = ({ sr, sv, onCambio }) => {
@@ -39,7 +39,8 @@ const Carousel = ({ sr, sv, onCambio }) => {
         if (clickedElement.classList.contains('lim')) {
             document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
             const iden = event.target.id;
-            setRoom(iden);
+            const info = options.find((object) => object.id === iden).label;
+            setRoom(info);
             event.currentTarget.querySelector(`#${iden}`).setAttribute('opacity', '.7');
             event.currentTarget.querySelector(`#${iden}`).setAttribute('fill', '#66c0f4');
             setOpenInfo(true);
@@ -55,7 +56,7 @@ const Carousel = ({ sr, sv, onCambio }) => {
                 {sen && (
                     <img src="/1/sen.png" className={styles.edi3} />
                 )}
-                <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} />
+                <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} id='map' />
             </div>
 
             <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"car"} nom={room} room={room}/>

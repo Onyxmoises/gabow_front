@@ -6,26 +6,47 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
 
     const [value, setValue] = useState();
 
-    const manejarCambio = (event) => {
-        if(event == null){
+    const camPiso = (lugar) => {
+        return new Promise((resolve, reject,) => {
+            onCambio(lugar);
+            resolve();
+        });
+    };
 
-        }else{
-            const id = event.id;
-            onCambio(event.lugar);
-            setRoom(event.label);
+    const camInfo = (label) => {
+        return new Promise((resolve, reject) => {
+            setRoom(label);
             setTimeout(() => {
-                colorCambio(id);
-            }, 200);
+                resolve();
+            }, 500);
+        });
+    };
+
+    const camColor = (id) => {
+        return new Promise((resolve, reject) => {
+            const cont = document.getElementById("map");
+            cont.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
+            cont.querySelector(`#${id}`).setAttribute('opacity', '.7');
+            cont.querySelector(`#${id}`).setAttribute('fill', '#66c0f4');
+            cont.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+            resolve();
+        });
+    };
+
+    const busqueda = async (event) => {
+        if (event == null) {
+
+        } else {
+            const lugar = event.lugar;
+            const label = event.label;
+            const id = event.id;
+
+            await camPiso(lugar);
+            await camInfo(label);
+            await camColor(id);
             setOpenInfo(true);
         }
-    };
-
-    const colorCambio = (id) => {
-        document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
-        document.querySelector(`#${id}`).setAttribute('opacity', '.7');
-        document.querySelector(`#${id}`).setAttribute('fill', '#66c0f4');
-        document.querySelector(`#${id}`).scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-    };
+    }
 
     return (
         <>
@@ -35,7 +56,7 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
                         classes={{ paper: styles.paper }}
                         value={value}
                         onChange={(event, newValue) => {
-                            manejarCambio(newValue);
+                            busqueda(newValue);
                         }}
                         options={options}
                         groupBy={(option) => option.piso}

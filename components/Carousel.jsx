@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Fade } from '@mui/material';
 import styles from '../styles/Carousel.module.scss'
 import Info from './Info'
 import Ley from './Ley'
@@ -53,9 +54,9 @@ const Carousel = ({ sr, sv, onCambio }) => {
         <>
             <div className={styles.edi} >
                 <img src={sr} className={styles.edi2} />
-                {sen && (
+                <Fade in={sen}>
                     <img src="/1/sen.png" className={styles.edi3} />
-                )}
+                </Fade>
                 <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} id='map' />
             </div>
 

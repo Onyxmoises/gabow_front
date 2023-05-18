@@ -3,9 +3,6 @@ import { Drawer, Box, Typography, IconButton, Grid, Snackbar, useMediaQuery, But
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from '../styles/Info.module.scss';
 
-import InfoPrincipal from './InfoPrincipal';
-import InfoCarousel from './InfoCarousel';
-
 const Info = ({ tipo, openInfo, closeInfo, edi, nom }) => {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -32,12 +29,23 @@ const Info = ({ tipo, openInfo, closeInfo, edi, nom }) => {
                 </Grid>
             </Snackbar>
             <Drawer anchor={isDesktop ? 'left' : 'bottom'} open={isOpen} onClose={closeAll}>
-                {tipo == "map" &&
-                    <InfoPrincipal nom={nom} edi={edi} />
-                }
-                {tipo == "car" &&
-                    <InfoCarousel nom={nom} />
-                }
+                <Box className={styles.box}>
+                    <hr />
+                    <Typography variant='h4'>GABOW</Typography>
+                    <Typography variant='h6' role='presentation'>
+                        <hr />
+                        {nom == "" && "Bienvenido"}
+                        {nom}
+                    </Typography>
+                    <Typography variant='h6' role='presentation'>
+                        {tipo == "map" && edi != 0 &&
+                            <Button variant="contained" href={`/Edificio/${edi}`} >ir a</Button>
+                        }
+                        {tipo == "car" &&
+                            <Button variant="contained" href={`/`} >Regresar</Button>
+                        }
+                    </Typography>
+                </Box>
             </Drawer>
 
         </>

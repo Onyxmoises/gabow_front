@@ -68,7 +68,7 @@ const Mapa = () => {
         setOpenInfo(true);
         setEdi(inf);
 
-        const dat = data[inf - 1];
+        const dat = data.find(item=>item.id_est==inf);
         setNom(dat.est_nombre);
 
         mapC.flyTo([selectedOption.est_latitud,selectedOption.est_longitud], 18, {
@@ -83,7 +83,7 @@ const Mapa = () => {
         setOpenInfo(true);
         setEdi(inf);
 
-        const dat = data[inf - 1];
+        const dat = data.find(item=>item.id_est==inf);
         setNom(dat.est_nombre);
 
         mapa.flyTo(e.latlng,18,{

@@ -99,7 +99,9 @@ const Locations = () => {
                                     <img src={item.imgBase64}></img>
                                 </td>
                                 <td>
-                                    <button>Consultar</button>
+                                    <Link href={`/admin/locations/${item.id_est}`}>
+                                        <h4>Consultar</h4>
+                                    </Link>
                                 </td>
                                 <td>
                                     <button onClick={()=>handleDelete(item.id_est)}>Eliminar Ubicacion</button>

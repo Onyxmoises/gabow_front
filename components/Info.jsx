@@ -45,6 +45,7 @@ const Info = ({ tipo, openInfo, closeInfo, edi, nom, value, hor }) => {
                     <Typography variant='h4'>GABOW</Typography>
                     <hr />
                     <Typography variant='h6' role='presentation'>
+
                         {nom == "" && "Bienvenido"}
                         {nom}
                     </Typography>

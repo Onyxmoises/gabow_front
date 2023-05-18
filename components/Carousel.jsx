@@ -10,7 +10,7 @@ const options = [
     { label: "Salon 24", id: "Salon_24", piso: "Piso 01", lugar: 2 },
     { label: "Salon 22", id: "Salon_22", piso: "Piso 01", lugar: 2 },
     { label: "Laboratorio Nuevas Tecnologias", id: "LNT", piso: "Piso 02", lugar: 3 },
-    { label: "Laboratorios de Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
+    { label: "Laboratorio 1 de Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
 ];
 
 const Carousel = ({ sr, sv, onCambio }) => {

@@ -6,6 +6,7 @@ const InfoPrincipal = ({ nom, edi }) => {
     return (
         <>
             <Box className={styles.box}>
+                <hr />
                 <Typography variant='h4'>GABOW</Typography>
                 <Typography variant='h6' role='presentation'>
                     <hr />

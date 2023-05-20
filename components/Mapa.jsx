@@ -15,13 +15,29 @@ import Info from './Info'
         id: 1,
         label: "CECyT 9",
         value: [19.453541614839263, -99.1755475346185],
-        type: "escuela"
+        type: "escuela",
+        puntuacion: 1,
+        horario: ["jueves 9:00-21:00",
+                "viernes 7:00-21:00",
+                "sábado	Cerrado",
+                "domingo Cerrado",
+                "lunes 7:00-21:00",
+                "martes 7:00-21:00",
+                "miércoles 7:00-21:00"]
     },
     {
         id: 2,
         label: "Town Center",
         value: [19.50353658790755, -99.20293583642929],
-        type: "plaza"
+        type: "plaza",
+        puntuacion: 4,
+        horario: ["jueves 10:00-21:00",
+                "viernes 10:00-21:00",
+                "sábado 10:00-21:00",
+                "domingo 10:00-21:00",
+                "lunes 10:00-21:00",
+                "martes 10:00-21:00",
+                "miércoles 10:00-21:00"]
     }
 ];*/
 
@@ -60,6 +76,9 @@ const Mapa = () => {
         getMarkerData();
 
     },[])
+    const [value, setValue] = useState(0);
+    const [hor, setHor] = useState("");
+    
     const cambiar = selectedOption => {
         console.log(selectedOption);
         const mapC = mapRef.current;
@@ -83,8 +102,13 @@ const Mapa = () => {
         setOpenInfo(true);
         setEdi(inf);
 
+
         const dat = data.find(item=>item.id_est==inf);
         setNom(dat.est_nombre);
+
+        setValue(dat.puntuacion);
+        setHor(dat.horario);
+
 
         mapa.flyTo(e.latlng,18,{
             duration:2
@@ -129,7 +153,7 @@ const Mapa = () => {
             
             <Ley tipo={'gen'}/>
 
-            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"map"} edi={edi} nom={nom}/>
+            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"map"} edi={edi} nom={nom} value={value} hor={hor}/>
         </>
     )
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Fade } from '@mui/material';
 import styles from '../styles/Carousel.module.scss'
 import Info from './Info'
 import Ley from './Ley'
@@ -10,7 +11,7 @@ const options = [
     { label: "Salon 24", id: "Salon_24", piso: "Piso 01", lugar: 2 },
     { label: "Salon 22", id: "Salon_22", piso: "Piso 01", lugar: 2 },
     { label: "Laboratorio Nuevas Tecnologias", id: "LNT", piso: "Piso 02", lugar: 3 },
-    { label: "Laboratorios de Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
+    { label: "Laboratorio 1 de Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
 ];
 
 const Carousel = ({ sr, sv, onCambio }) => {
@@ -53,9 +54,9 @@ const Carousel = ({ sr, sv, onCambio }) => {
         <>
             <div className={styles.edi} >
                 <img src={sr} className={styles.edi2} />
-                {sen && (
+                <Fade in={sen}>
                     <img src="/1/sen.png" className={styles.edi3} />
-                )}
+                </Fade>
                 <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} id='map' />
             </div>
 

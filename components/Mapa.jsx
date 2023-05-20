@@ -1,4 +1,4 @@
-import React, { useState, useRef,useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Head from 'next/head'
 import { MapContainer, TileLayer, Marker, ZoomControl, } from 'react-leaflet'
 import ResetViewControl from '@20tab/react-leaflet-resetview';
@@ -9,64 +9,23 @@ import axios from 'axios';
 import Ley from './Ley'
 import Info from './Info'
 
-// Esta data se saca de la BD
-/*const data = [
-    {
-        id: 1,
-        label: "CECyT 9",
-        value: [19.453541614839263, -99.1755475346185],
-        type: "escuela",
-        puntuacion: 1,
-        horario: ["jueves 9:00-21:00",
-                "viernes 7:00-21:00",
-                "sábado	Cerrado",
-                "domingo Cerrado",
-                "lunes 7:00-21:00",
-                "martes 7:00-21:00",
-                "miércoles 7:00-21:00"]
-    },
-    {
-        id: 2,
-        label: "Town Center",
-        value: [19.50353658790755, -99.20293583642929],
-        type: "plaza",
-        puntuacion: 4,
-        horario: ["jueves 10:00-21:00",
-                "viernes 10:00-21:00",
-                "sábado 10:00-21:00",
-                "domingo 10:00-21:00",
-                "lunes 10:00-21:00",
-                "martes 10:00-21:00",
-                "miércoles 10:00-21:00"]
-    }
-];*/
-
-// Cambiar el icono de los marker
-/*function icono(type) {
-    const icon = new Icon({
-        iconUrl: '/icons/' + type + '.png',
-        iconSize: [50, 50]
-    })
-    return icon
-}*/
-
 const Mapa = () => {
-    
+
     const mapRef = useRef();
     const markerRef = useRef();
-    
+
     const [openInfo, setOpenInfo] = useState(false);
-    const [edi, setEdi] = useState(0);
-    const [nom, setNom] = useState("");
     const [cord, setCord] = useState([19.472819274952897, -99.14333273147834]);
-    const [data , setData] = useState([])
-    useEffect(()=>{
+    const [data, setData] = useState([]);
+    const [info, setInfo] = useState({});
 
-        const getMarkerData = async()=>{
+    useEffect(() => {
 
-            const {data} = await axios.post("/api/handlers/getMarkerDataHandler" , {})
-            data.data.map((item,index)=>{
-                data.data[index]={...item,label:item.est_nombre};
+        const getMarkerData = async () => {
+
+            const { data } = await axios.post("/api/handlers/getMarkerDataHandler", {})
+            data.data.map((item, index) => {
+                data.data[index] = { ...item, label: item.est_nombre };
             })
             setData(data.data)
             console.log(data.data);
@@ -75,44 +34,32 @@ const Mapa = () => {
 
         getMarkerData();
 
-    },[])
-    const [value, setValue] = useState(0);
-    const [hor, setHor] = useState("");
-    
+    }, [])
+
     const cambiar = selectedOption => {
-        console.log(selectedOption);
         const mapC = mapRef.current;
         const inf = selectedOption.id_est;
-        
-        setOpenInfo(true);
-        setEdi(inf);
+        const dat = data.find(item => item.id_est == inf);
 
-        const dat = data.find(item=>item.id_est==inf);
-        setNom(dat.est_nombre);
+        setInfo(dat);
 
-        mapC.flyTo([selectedOption.est_latitud,selectedOption.est_longitud], 18, {
+        mapC.flyTo([selectedOption.est_latitud, selectedOption.est_longitud], 18, {
             duration: 2
         });
+        setOpenInfo(true);
     }
-    
+
     const onClick = (e) => {
         const mapa = mapRef.current;
         const inf = e.sourceTarget.options.id;
-        console.log(e);
-        setOpenInfo(true);
-        setEdi(inf);
+        const dat = data.find(item => item.id_est == inf);
 
+        setInfo(dat);
 
-        const dat = data.find(item=>item.id_est==inf);
-        setNom(dat.est_nombre);
-
-        setValue(dat.puntuacion);
-        setHor(dat.horario);
-
-
-        mapa.flyTo(e.latlng,18,{
-            duration:2
+        mapa.flyTo(e.latlng, 18, {
+            duration: 2
         });
+        setOpenInfo(true);
     }
 
     const closeInfo = () => {
@@ -127,7 +74,7 @@ const Mapa = () => {
 
             {/* BUSCADOR */}
             <div className={styles.container2}>
-                <Select className={styles.buscador} options={data} onChange={cambiar} placeholder='Buscar'/>
+                <Select className={styles.buscador} options={data} onChange={cambiar} placeholder='Buscar' />
             </div>
 
             {/* MAPA */}
@@ -139,21 +86,20 @@ const Mapa = () => {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
 
-                    <ZoomControl position='bottomleft'/>
+                    <ZoomControl position='bottomleft' />
 
-                    <ResetViewControl position='bottomleft' icon="url(/pointer.png)"/>
+                    <ResetViewControl position='bottomleft' icon="url(/pointer.png)" />
 
                     {data.map((item) => (
-                        <Marker key={item.id_est} id={item.id_est} position={[item.est_latitud , item.est_longitud]} icon={new Icon({iconUrl:item.imgBase64,iconSize:[50,50]})} eventHandlers={{ click: onClick }}>
-                        </Marker>
+                        <Marker key={item.id_est} id={item.id_est} position={[item.est_latitud, item.est_longitud]} icon={new Icon({ iconUrl: item.imgBase64, iconSize: [50, 50] })} eventHandlers={{ click: onClick }} />
                     ))}
 
                 </MapContainer>
             </div>
-            
-            <Ley tipo={'gen'}/>
 
-            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"map"} edi={edi} nom={nom} value={value} hor={hor}/>
+            <Ley tipo={'gen'} />
+
+            <Info tipo={"map"} openInfo={openInfo} closeInfo={closeInfo} info={info} />
         </>
     )
 }

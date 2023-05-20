@@ -3,7 +3,10 @@ import { Drawer, Box, Typography, IconButton, Grid, Snackbar, useMediaQuery, But
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from '../styles/Info.module.scss';
 
-const Info = ({ tipo, openInfo, closeInfo, edi, nom, value, hor }) => {
+import InfoMap from './InfoMap';
+import InfoEdi from './InfoEdi';
+
+const Info = ({ tipo, openInfo, closeInfo, info }) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const isDesktop = useMediaQuery('(min-width:960px)');
@@ -16,17 +19,6 @@ const Info = ({ tipo, openInfo, closeInfo, edi, nom, value, hor }) => {
         closeInfo();
         setIsOpen(false);
     }
-
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
     return (
         <>
@@ -45,43 +37,11 @@ const Info = ({ tipo, openInfo, closeInfo, edi, nom, value, hor }) => {
                     <Typography variant='h4'>GABOW</Typography>
                     <hr />
                     <Typography variant='h6' role='presentation'>
-
-                        {nom == "" && "Bienvenido"}
-                        {nom}
-                    </Typography>
-                    <Typography variant='h6' role='presentation'>
-                        {tipo == "map" && edi != 0 &&
-                            <div>
-                                <Typography variant='h6' role='presentation'>
-                                    <Button variant="contained" onClick={handleClick} >Horarios</Button>
-                                    <Popover
-                                        className={styles.popover}
-                                        open={open}
-                                        anchorEl={anchorEl}
-                                        onClose={handleClose}
-                                        anchorOrigin={{
-                                            vertical: 'bottom',
-                                            horizontal: 'left',
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'left',
-                                        }}>
-                                        {hor.map((item) => (
-                                            <Typography> {item} </Typography>
-                                        ))}
-                                    </Popover>
-                                </Typography>
-                                <Typography>
-                                    <Rating value={value} readOnly />
-                                </Typography>
-                                <Typography>
-                                    <Button variant="contained" href={`/Edificio/${edi}`} >ir a</Button>
-                                </Typography>
-                            </div>
+                        {tipo == "map" &&
+                            <InfoMap info={info} />
                         }
                         {tipo == "car" &&
-                            <Button variant="contained" href={`/`} >Regresar</Button>
+                            <InfoEdi />
                         }
                     </Typography>
                 </Box>

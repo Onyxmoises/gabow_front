@@ -56,7 +56,7 @@ const createSubgraph = () =>{
 
     return (
     <>
-    <p>SUBE LOS ARCHIVOS Y GUARDA EL SUB GRAFO<br/>CUANDO ESTES LISTO PERRO BASTARDO GUARDALO POR COMPLETO</p>
+    <p>SUBE LOS ARCHIVOS Y GUARDA EL SUB GRAFO<br/>CUANDO ESTES LISTO GUARDALO POR COMPLETO</p>
     <label>DALE NOMBRE A TU GRAFO</label>
     <input type="text" id="name"/>
     <br />

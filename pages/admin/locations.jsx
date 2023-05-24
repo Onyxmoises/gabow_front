@@ -82,7 +82,7 @@ const Locations = () => {
                     <p>Aun no hay registros de lugares</p>
                 </>
             ) : (
-                <table border={1}>
+                <table border={1} style={{ textAlign: "center" }}>
                     <thead>
                         <tr>
                             <th>Id</th>

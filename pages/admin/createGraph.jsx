@@ -56,26 +56,25 @@ const createSubgraph = () =>{
 
     return (
     <>
-    <h1>QUE PEDO</h1>
     <p>SUBE LOS ARCHIVOS Y GUARDA EL SUB GRAFO<br/>CUANDO ESTES LISTO PERRO BASTARDO GUARDALO POR COMPLETO</p>
-    <label>DALE NOMBRE A TU GRAFO ZORRA</label>
+    <label>DALE NOMBRE A TU GRAFO</label>
     <input type="text" id="name"/>
     <br />
     <br />
-    <label>DALE NOMBRE A TU SUB GRAFO IMBECIL</label>
+    <label>DALE NOMBRE A TU SUB GRAFO</label>
     <input type="text" id="subname"/>
     <br />
     <br />
-    <label>SUBE TU PERRO ARCHIVO</label>
+    <label>SUBE TU ARCHIVO</label>
     <input type="file" id="file" onChange={addSubGraph} />
     <br />
     <br />
-    <label>GUARDALO PERRO</label>
+    <label>GUARDALO </label>
     <input type="button" onClick={saveGraph} value="PUTOS TODOS"/>
     <br />
     <br />
     <label>CHECHA EL STATUS DEL GRAFO GLOBAL</label>
-    <input type="button" onClick={console.log(JSON.stringify({Batiz : graph}))} value="PUTOS TODOS"/>
+    <input type="button" onClick={console.log(JSON.stringify({Batiz : graph}))} value="COMPROBAR"/>
     <br />
     <br />
     </>

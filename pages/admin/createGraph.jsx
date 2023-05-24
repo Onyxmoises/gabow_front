@@ -70,7 +70,7 @@ const createSubgraph = () =>{
     <br />
     <br />
     <label>GUARDALO </label>
-    <input type="button" onClick={saveGraph} value="PUTOS TODOS"/>
+    <input type="button" onClick={saveGraph} value="COMPROBAR"/>
     <br />
     <br />
     <label>CHECHA EL STATUS DEL GRAFO GLOBAL</label>

@@ -5,7 +5,7 @@ const getMarkerDataHandler = (req,res) =>{
 
     con.query(myquerys.getMarkerData , (error , response) =>{
 
-        if(error){res.status(500).json({status : "somethig went wrong"})}
+        if(error){res.status(500).json({status : "somethig went wrong",error:error})}
 
         else{
             

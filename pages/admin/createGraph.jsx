@@ -2,7 +2,7 @@ import { useEffect , useState } from "react";
 import axios from "axios";
 const createSubgraph = () =>{
 
-    const [graph , setGraph] = useState({})
+    const [graph , setGraph] = useState([])
 
     const addSubGraph = (evt) =>{
 
@@ -16,11 +16,8 @@ const createSubgraph = () =>{
 
                 const list = extractIds(e.target.result);
                 const new_list = list.filter(item => item != "").filter(item => item.length < 6 && item.length > 0).filter(item => item != 'LNT');
-                const name = document.getElementById('subname').value;
-                const graphCopy = {... graph}
-                graphCopy[name] = new_list
-                setGraph(graph => ({... graphCopy}))
-                console.log(graph)
+                setGraph(graph.concat(new_list))
+                
 
             }
             reader.onerror = (e) =>{
@@ -36,9 +33,15 @@ const createSubgraph = () =>{
     const saveGraph = async() =>{
         
         const name = document.getElementById('name').value;
-        const svgList = JSON.stringify({name : graph})
-        const response = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/createGraph/text=${svgList}` , {});
-        console.log(response.data)
+        const svgList = {}
+        svgList[name] = graph
+
+        const response = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/createGraph/text=${JSON.stringify(svgList)}` , {});
+        if(response.data.status.status == 'ok'){
+
+            window.location.reload()
+
+        } 
 
     }
 
@@ -56,13 +59,14 @@ const createSubgraph = () =>{
 
     return (
     <>
-    <p>SUBE LOS ARCHIVOS Y GUARDA EL SUB GRAFO<br/>CUANDO ESTES LISTO GUARDALO POR COMPLETO</p>
-    <label>DALE NOMBRE A TU GRAFO</label>
+    <p>
+        DALE EL NOMRBA AL GRAFO DEACUERDO A UNA SINTAXIS COMO ESTA <br/>
+        NOMBRE DEL LUGAR EN UNA SOLA PALABRA _ GRAPH USANDO CAMEL CASE<br/>
+        POR EJEMPLO<br/><br/>
+        Batiz_Graph , TownCenter_Graph , ChapultepecSeccion1_Graph
+    </p>
+    <h1>DALE NOMBRE A TU GRAFO</h1>
     <input type="text" id="name"/>
-    <br />
-    <br />
-    <label>DALE NOMBRE A TU SUB GRAFO</label>
-    <input type="text" id="subname"/>
     <br />
     <br />
     <label>SUBE TU ARCHIVO</label>
@@ -73,10 +77,11 @@ const createSubgraph = () =>{
     <input type="button" onClick={saveGraph} value="COMPROBAR"/>
     <br />
     <br />
-    <label>CHECHA EL STATUS DEL GRAFO GLOBAL</label>
-    <input type="button" onClick={console.log(JSON.stringify({Batiz : graph}))} value="COMPROBAR"/>
+    <label>MIRAME</label>
+    <input type="button" onClick={console.log(JSON.stringify(graph))} value="COMPROBAR"/>
     <br />
     <br />
+
     </>
     )
 

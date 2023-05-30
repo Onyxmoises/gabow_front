@@ -14,7 +14,7 @@ const options = [
     { label: "Laboratorio 1 de Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
 ];
 
-const Carousel = ({ sr, sv, onCambio }) => {
+const Carousel = ({ sr, sv, ss, onCambio }) => {
 
     const [openInfo, setOpenInfo] = useState(false);
     const [room, setRoom] = useState("");
@@ -55,7 +55,7 @@ const Carousel = ({ sr, sv, onCambio }) => {
             <div className={styles.edi} >
                 <img src={sr} className={styles.edi2} />
                 <Fade in={sen}>
-                    <img src="/1/sen.png" className={styles.edi3} />
+                    <img src={ss} className={styles.edi3} />
                 </Fade>
                 <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} id='map' />
             </div>

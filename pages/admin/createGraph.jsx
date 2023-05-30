@@ -59,6 +59,7 @@ const createSubgraph = () =>{
 
     return (
     <>
+<<<<<<< HEAD
     <p>
         DALE EL NOMRBA AL GRAFO DEACUERDO A UNA SINTAXIS COMO ESTA <br/>
         NOMBRE DEL LUGAR EN UNA SOLA PALABRA _ GRAPH USANDO CAMEL CASE<br/>
@@ -66,6 +67,10 @@ const createSubgraph = () =>{
         Batiz_Graph , TownCenter_Graph , ChapultepecSeccion1_Graph
     </p>
     <h1>DALE NOMBRE A TU GRAFO</h1>
+=======
+    <p>SUBE LOS ARCHIVOS Y GUARDA EL SUB GRAFO<br/>CUANDO ESTES LISTO GUARDALO POR COMPLETO</p>
+    <label>DALE NOMBRE A TU GRAFO</label>
+>>>>>>> b4a71b41a00aa7908c36a16aa3f559b1ec873cfe
     <input type="text" id="name"/>
     <br />
     <br />

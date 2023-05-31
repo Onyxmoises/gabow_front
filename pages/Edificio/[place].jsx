@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Pagination, Snackbar } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -8,72 +8,72 @@ import axios from 'axios'
 
 const Edificio = () => {
 
-    const getInfoRoute = async() =>{
-        
+    const getInfoRoute = async () => {
+
         const reference = typePlace[place]
 
-        const {data} = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/getRoute?i=${i}&d=${d}&reference=${reference}` , {})
+        const { data } = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/getRoute?i=${i}&d=${d}&reference=${reference}`, {})
 
         console.log(data.graph_Data.shortestPath)
-        
+
         const shortest_Route = data.graph_Data.shortestPath;
-        shortest_Route.map(node =>{
+        shortest_Route.map(node => {
 
-            try{
+            try {
 
-                if(document.getElementById(node) != null){document.getElementById(node).style.opacity = 1}
+                if (document.getElementById(node) != null) { document.getElementById(node).style.opacity = 1 }
 
             }
-            catch(e){
+            catch (e) {
 
                 console.log(e)
 
             }
 
         })
-        for (let index = 0; index < shortest_Route.length ; index++) {
-            
-            const firstConection = shortest_Route[index] + '-' +  shortest_Route[index + 1 ]
-            const secondConection = shortest_Route[index + 1] + '-' +  shortest_Route[index]
+        for (let index = 0; index < shortest_Route.length; index++) {
 
-            if(document.getElementById(firstConection) != null){
+            const firstConection = shortest_Route[index] + '-' + shortest_Route[index + 1]
+            const secondConection = shortest_Route[index + 1] + '-' + shortest_Route[index]
 
-                try{
+            if (document.getElementById(firstConection) != null) {
+
+                try {
 
                     document.getElementById(firstConection).style.opacity = 1
 
                 }
-                catch(e){
+                catch (e) {
 
                     console.log(e)
 
                 }
 
             }
-            else{
+            else {
 
-                try{
+                try {
 
                     document.getElementById(secondConection).style.opacity = 1
 
                 }
-                catch(e){
+                catch (e) {
 
                     console.log(e)
 
                 }
 
             }
-            
+
         }
 
 
     }
-    
+
 
 
     const [change, setChange] = useState(1)
-    
+
     const router = useRouter()
 
     if (!router.isReady) {
@@ -90,11 +90,11 @@ const Edificio = () => {
     ]
 
     const typePlace = {
-        
-        1 : 'Batiz_Graph' ,
-        2 : 'TownCenter_Graph' ,
-        3 : 'ChapultepecSeccion1_Graph'
-    
+
+        1: 'Batiz_Graph',
+        2: 'TownCenter_Graph',
+        3: 'ChapultepecSeccion1_Graph'
+
     };
 
     const dat = data[change - 1];
@@ -125,7 +125,7 @@ const Edificio = () => {
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
                     {/* <p>{dat.label}</p> */}
-                    <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel}/>
+                    <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel} />
                 </div>
             </Snackbar>
         </>

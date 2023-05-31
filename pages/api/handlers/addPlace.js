@@ -1,9 +1,10 @@
 import con from "../db/config";
 import myquerys from "../db/myquerys";
 
-export default function(req,res){
+export default async function(req,res){
     const {nombre,desc,horaApertura,horaCierre,pagina,latitud,longitud,categoria}=req.body;
-    console.log(req.body);
+    
+    /*console.log(req.body);
     con.query(myquerys.insertPlace,[nombre,desc,horaApertura,horaCierre,pagina,latitud,longitud,categoria],(err,result)=>{
         if(err){
             res.status(500).json({
@@ -16,5 +17,5 @@ export default function(req,res){
                 result:result
             });
         }
-    });
+    });*/
 }

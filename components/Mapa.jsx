@@ -24,11 +24,11 @@ const Mapa = () => {
         const getMarkerData = async () => {
 
             const { data } = await axios.post("/api/handlers/getMarkerDataHandler", {})
-            data.data.map((item, index) => {
-                data.data[index] = { ...item, label: item.est_nombre };
+            data.result.map((item, index) => {
+                data.result[index] = { ...item, label: item.est_nombre };
             })
-            setData(data.data)
-            console.log(data.data);
+            setData(data.result)
+            console.log(data.result);
 
         }
 

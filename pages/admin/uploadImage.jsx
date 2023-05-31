@@ -6,6 +6,10 @@ const ImageUploadForm = () => {
     const [catalogos, setCatalogos] = useState([]);
     const [base64, setBase64] = useState([]);
 
+    useEffect(()=>{
+        console.log(catalogos);
+    },[catalogos]);
+
     const handleImageChange = (event) => {
 
         console.log(event.target.id)
@@ -36,7 +40,7 @@ const ImageUploadForm = () => {
     useEffect(() => {
         const getDataFromCEstablecimientos = async () => {
             const { data } = await axios.post("/api/handlers/getCEstablecimiento");
-            setCatalogos(data.data);
+            setCatalogos(data.result);
         }
         getDataFromCEstablecimientos();
     }, []);

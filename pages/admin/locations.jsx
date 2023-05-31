@@ -43,9 +43,9 @@ const Locations = () => {
         }
     }
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         console.log(places);
-    },[places])
+    },[places])*/
 
     useEffect(() => {
         console.log(categorias)
@@ -54,18 +54,19 @@ const Locations = () => {
     useEffect(() => {
         const getData = async () => {
             const { data } = await axios.post("/api/handlers/getMarkerDataHandler");
-            setPLaces(data.data);
+            setPLaces(data.result);
         }
         getData();
         const fetchCategorias = async () => {
             const { data } = await axios.post("/api/handlers/getCEstablecimiento");
-            data.data.map(item => {
+            console.log(data);
+            data.result.map(item => {
                 item.label = item.cest_nombre;
                 item.value = item.id_catalogo;
                 delete item.cest_nombre;
                 delete item.id_catalogo;
             });
-            setCategorias(data.data);
+            setCategorias(data.result);
         }
         fetchCategorias()
     }, [])

@@ -4,7 +4,8 @@ const myquerys ={
     insertImages:"update CEstablecimientos set imgBase64=? where id_catalogo=?",
     insertPlace:"insert into Establecimientos(est_nombre,est_descripcion,est_horaApertura,est_horaCierre,est_paginaWeb,est_latitud,est_longitud,id_catalogo) values(?,?,?,?,?,?,?,?)",
     deletePlace:"delete from Establecimientos where id_est=?",
-    selectPlaceById:"select * from Establecimientos where id_est=?"
+    selectPlaceById:"select * from Establecimientos where id_est=?",
+    updatePlace:"update Establecimientos set est_nombre=?,est_descripcion=?,est_horaApertura=?,est_horaCierre=?,est_paginaWeb=?,est_latitud=?,est_longitud=?,id_catalogo=? where id_est=?"
 }
 
 export default myquerys;

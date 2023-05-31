@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { Pagination, Snackbar } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -6,75 +6,75 @@ import Carousel from '../../components/Carousel'
 import styles from '../../styles/Edificio.module.scss'
 import axios from 'axios'
 
-const Edificio = () => {
-    useEffect(() =>{
+const Establecimiento = () => {
+    useEffect(() => {
 
-        const getInfoRoute = async(reference , i , d) =>{
+        const getInfoRoute = async (reference, i, d) => {
 
-            const {data} = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/getGraph?i=${i}&d=${d}&reference=${reference}`)
+            const { data } = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/getGraph?i=${i}&d=${d}&reference=${reference}`)
 
             console.log(data.graph_Data.shortestPath)
-            
+
             const shortest_Route = data.graph_Data.shortestPath;
-            shortest_Route.map(node =>{
+            shortest_Route.map(node => {
 
-                try{
+                try {
 
-                    if(document.getElementById(node) != null){document.getElementById(node).style.opacity = 1}
+                    if (document.getElementById(node) != null) { document.getElementById(node).style.opacity = 1 }
 
                 }
-                catch(e){
+                catch (e) {
 
                     console.log(e)
 
                 }
 
             })
-            for (let index = 0; index < shortest_Route.length ; index++) {
-                
-                const firstConection = shortest_Route[index] + '-' +  shortest_Route[index + 1 ]
-                const secondConection = shortest_Route[index + 1] + '-' +  shortest_Route[index]
+            for (let index = 0; index < shortest_Route.length; index++) {
 
-                if(document.getElementById(firstConection) != null){
+                const firstConection = shortest_Route[index] + '-' + shortest_Route[index + 1]
+                const secondConection = shortest_Route[index + 1] + '-' + shortest_Route[index]
 
-                    try{
+                if (document.getElementById(firstConection) != null) {
+
+                    try {
 
                         document.getElementById(firstConection).style.opacity = 1
 
                     }
-                    catch(e){
+                    catch (e) {
 
                         console.log(e)
 
                     }
 
                 }
-                else{
+                else {
 
-                    try{
+                    try {
 
                         document.getElementById(secondConection).style.opacity = 1
 
                     }
-                    catch(e){
+                    catch (e) {
 
                         console.log(e)
 
                     }
 
                 }
-                
+
             }
 
 
         }
 
-        getInfoRoute('batiz_Graph' , 'F' , 'O')
+        getInfoRoute('batiz_Graph', 'F', 'O')
 
-    } , [])
-    
+    }, [])
+
     const [change, setChange] = useState(1)
-    
+
     const router = useRouter()
 
     if (!router.isReady) {
@@ -84,6 +84,7 @@ const Edificio = () => {
     const { place } = router.query
 
     const data = [
+        { label: "GEN", sr: `/${place}/GEN.jpg`, sv: `/${place}/GEN.svg`, ss: `/${place}/GEN.png` },
         { label: "PB", sr: `/${place}/PB.jpg`, sv: `/${place}/PB.svg`, ss: `/${place}/PB.png` },
         { label: "P01", sr: `/${place}/P01.jpg`, sv: `/${place}/P01.svg`, ss: `/${place}/P01.png` },
         { label: "P02", sr: `/${place}/P02.jpg`, sv: `/${place}/P02.svg`, ss: `/${place}/P02.png` },
@@ -91,10 +92,10 @@ const Edificio = () => {
     ]
 
     const typePlace = {
-        
-        1 : 'batiz_Graph' ,
-        2 : 'townCenter_Graph'
-    
+
+        1: 'batiz_Graph',
+        2: 'townCenter_Graph'
+
     };
 
     const dat = data[change - 1];
@@ -112,9 +113,6 @@ const Edificio = () => {
         return dat.label;
     }
 
-
-
-
     return (
         <>
             <Head>
@@ -126,12 +124,11 @@ const Edificio = () => {
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
-                    {/* <p>{dat.label}</p> */}
-                    <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel}/>
+                    <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel} />
                 </div>
             </Snackbar>
         </>
     )
 }
 
-export default Edificio
+export default Establecimiento

@@ -4,24 +4,31 @@ import styles from '../styles/Carousel.module.scss'
 import Info from './Info'
 import Ley from './Ley'
 import Buscador from './Buscador'
+import axios from 'axios';
 
-const options = [
-    { label: "Usos Mulitiples", id: "Usos_Multiples", piso: "Planta Baja", lugar: 1},
-    { label: "Ciber Batiz", id: "Ciber_Batiz", piso: "Planta Baja", lugar: 1 },
-    { label: "Salon 24", id: "Salon_24", piso: "Piso 01", lugar: 2 },
-    { label: "Salon 22", id: "Salon_22", piso: "Piso 01", lugar: 2 },
-    { label: "Laboratorio Nuevas Tecnologias", id: "LNT", piso: "Piso 02", lugar: 3 },
-    { label: "Laboratorio 1 de Fisica", id: "Lab_Fis_01", piso: "Piso 03", lugar: 4 },
-];
 
-const Carousel = ({ sr, sv, ss, onCambio }) => {
+const Carousel = ({ sr, sv, ss, place, onCambio }) => {
 
+    const [options , setOptions] = useState([]);
     const [openInfo, setOpenInfo] = useState(false);
     const [room, setRoom] = useState("");
     const [svgCode, setSvgCode] = useState('');
     const [sen, setSen] = useState(false);
     
     useEffect(() => {
+
+        const getSubPlaces = async() =>{
+
+            const {data} = await axios.post("/api/handlers/getSubPlaces" , {
+                id_est:place
+            });
+            setOptions(data.data);
+
+        } // ESTA PARTE DA VALOR A LA DATA QUE SE VA USAR
+          // LA PARTE DE SEC_LUG ES DEL "ID" DEL PISO, SI ES 1 ES PLANTA BAJA Y ASI, EN LA PARTE DE 
+          // DARLES ID A LOS LUGARES DALES DE ID EL NOMBRE SI PUEDES Y TE ES MAS COMODO
+        getSubPlaces();
+
         fetch(sv)
             .then(response => response.text())
             .then(data => setSvgCode(data));

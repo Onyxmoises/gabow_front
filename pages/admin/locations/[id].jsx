@@ -10,7 +10,7 @@ const PlaceReader = ({ locationId }) => {
     useEffect(() => {
         console.log(categorias);
         console.log(placeInfo);
-        //setSelectedOption(categorias.find(item => item.value == placeInfo.id_catalogo));
+        setSelectedOption(categorias.find(item => item.value == placeInfo.id_catalogo));
     }, [categorias, placeInfo]);
     useEffect(() => {
         const fetchLocationInfo = async () => {
@@ -67,53 +67,6 @@ const PlaceReader = ({ locationId }) => {
                 </Link>
                 <h1>Consulta de {placeInfo.est_nombre}</h1>
                 <hr></hr>
-                <form onSubmit={handleSubmit}>
-                    <table border={1} style={{ textAlign: "center" }}>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Descripcion</th>
-                                <th>Hora Apertura</th>
-                                <th>Hora Cierre</th>
-                                <th>Latitud</th>
-                                <th>Longitud</th>
-                                <th>Pagina web</th>
-                                <th>Categoria</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input type="text" name="est_nombre" value={placeInfo.est_nombre}></input>
-                                </td>
-                                <td>
-                                    <input type="text" name="est_descripcion" value={placeInfo.est_descripcion}></input>
-                                </td>
-                                <td>
-                                    <input type="time" name="est_horaApertura" value={placeInfo.est_horaApertura}></input>
-                                </td>
-                                <td>
-                                    <input type="time" name="est_horaCierre" value={placeInfo.est_horaCierre}></input>
-                                </td>
-                                <td>
-                                    <input type="number" name="est_latitud" value={placeInfo.est_latitud}></input>
-                                </td>
-                                <td>
-                                    <input type="number" name="est_longitud" value={placeInfo.est_longitud}></input>
-                                </td>
-                                <td>
-                                    <input type="text" name="est_paginaWeb" value={placeInfo.est_paginaWeb}></input>
-                                </td>
-                                <td>
-                                    <Select options={categorias} name="id_catalogo" value={selectedOption}></Select>
-                                </td>
-                                <td>
-                                    <button type="submit">Guardar Cambios</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
             </>
         )
     }

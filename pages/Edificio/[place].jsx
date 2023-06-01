@@ -7,20 +7,51 @@ import styles from '../../styles/Edificio.module.scss'
 import axios from 'axios'
 
 const Edificio = () => {
-    useEffect(() => {
 
-        const getInfoRoute = async (reference, i, d) => {
+    const getInfoRoute = async () => {
 
-            const { data } = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/getGraph?i=${i}&d=${d}&reference=${reference}`)
+        const reference = typePlace[place]
 
-            console.log(data.graph_Data.shortestPath)
+        const { data } = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/getRoute?i=${i}&d=${d}&reference=${reference}`, {})
 
-            const shortest_Route = data.graph_Data.shortestPath;
-            shortest_Route.map(node => {
+        console.log(data.graph_Data.shortestPath)
+
+        const shortest_Route = data.graph_Data.shortestPath;
+        shortest_Route.map(node => {
+
+            try {
+
+                if (document.getElementById(node) != null) { document.getElementById(node).style.opacity = 1 }
+
+            }
+            catch (e) {
+                console.log(e)
+            }
+
+        })
+        for (let index = 0; index < shortest_Route.length; index++) {
+
+            const firstConection = shortest_Route[index] + '-' + shortest_Route[index + 1]
+            const secondConection = shortest_Route[index + 1] + '-' + shortest_Route[index]
+
+            if (document.getElementById(firstConection) != null) {
 
                 try {
 
-                    if (document.getElementById(node) != null) { document.getElementById(node).style.opacity = 1 }
+                    document.getElementById(firstConection).style.opacity = 1
+
+                }
+                catch (e) {
+
+                    console.log(e)
+
+                }
+            }
+            else {
+
+                try {
+
+                    document.getElementById(secondConection).style.opacity = 1
 
                 }
                 catch (e) {
@@ -29,49 +60,10 @@ const Edificio = () => {
 
                 }
 
-            })
-            for (let index = 0; index < shortest_Route.length; index++) {
-
-                const firstConection = shortest_Route[index] + '-' + shortest_Route[index + 1]
-                const secondConection = shortest_Route[index + 1] + '-' + shortest_Route[index]
-
-                if (document.getElementById(firstConection) != null) {
-
-                    try {
-
-                        document.getElementById(firstConection).style.opacity = 1
-
-                    }
-                    catch (e) {
-
-                        console.log(e)
-
-                    }
-
-                }
-                else {
-
-                    try {
-
-                        document.getElementById(secondConection).style.opacity = 1
-
-                    }
-                    catch (e) {
-
-                        console.log(e)
-
-                    }
-
-                }
-
             }
 
-
         }
-
-        getInfoRoute('batiz_Graph', 'F', 'O')
-
-    }, [])
+    }
 
     const [change, setChange] = useState(1)
 
@@ -93,8 +85,9 @@ const Edificio = () => {
 
     const typePlace = {
 
-        1: 'batiz_Graph',
-        2: 'townCenter_Graph'
+        1: 'Batiz_Graph',
+        2: 'TownCenter_Graph',
+        3: 'ChapultepecSeccion1_Graph'
 
     };
 
@@ -110,6 +103,7 @@ const Edificio = () => {
     };
 
     const changeLabel = () => {
+        console.log(dat.label)
         return dat.label;
     }
 

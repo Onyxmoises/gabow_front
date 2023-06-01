@@ -63,7 +63,6 @@ const Edificio = () => {
             }
 
         }
-
     }
 
     const [change, setChange] = useState(1)

@@ -6,7 +6,7 @@ import Carousel from '../../components/Carousel'
 import styles from '../../styles/Edificio.module.scss'
 import axios from 'axios'
 
-const Establecimiento = () => {
+const Edificio = () => {
     useEffect(() => {
 
         const getInfoRoute = async (reference, i, d) => {
@@ -131,4 +131,4 @@ const Establecimiento = () => {
     )
 }
 
-export default Establecimiento
+export default Edificio

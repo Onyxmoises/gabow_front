@@ -25,9 +25,13 @@ const Edificio = () => {
 
             }
             catch (e) {
+<<<<<<< HEAD
 
                 console.log(e)
 
+=======
+                console.log(e)
+>>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
             }
 
         })
@@ -44,6 +48,22 @@ const Edificio = () => {
 
                 }
                 catch (e) {
+<<<<<<< HEAD
+=======
+
+                    console.log(e)
+
+                }
+            }
+            else {
+
+                try {
+
+                    document.getElementById(secondConection).style.opacity = 1
+
+                }
+                catch (e) {
+>>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
 
                     console.log(e)
 
@@ -52,6 +72,7 @@ const Edificio = () => {
             }
             else {
 
+<<<<<<< HEAD
                 try {
 
                     document.getElementById(secondConection).style.opacity = 1
@@ -65,13 +86,19 @@ const Edificio = () => {
 
             }
 
+=======
+>>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
         }
+    }
 
+<<<<<<< HEAD
 
     }
 
 
 
+=======
+>>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
     const [change, setChange] = useState(1)
 
     const router = useRouter()
@@ -83,6 +110,7 @@ const Edificio = () => {
     const { place } = router.query
 
     const data = [
+        { label: "GEN", sr: `/${place}/GEN.jpg`, sv: `/${place}/GEN.svg`, ss: `/${place}/GEN.png` },
         { label: "PB", sr: `/${place}/PB.jpg`, sv: `/${place}/PB.svg`, ss: `/${place}/PB.png` },
         { label: "P01", sr: `/${place}/P01.jpg`, sv: `/${place}/P01.svg`, ss: `/${place}/P01.png` },
         { label: "P02", sr: `/${place}/P02.jpg`, sv: `/${place}/P02.svg`, ss: `/${place}/P02.png` },
@@ -124,7 +152,10 @@ const Edificio = () => {
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
+<<<<<<< HEAD
                     {/* <p>{dat.label}</p> */}
+=======
+>>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
                     <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel} />
                 </div>
             </Snackbar>

@@ -23,6 +23,10 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
                 id_est:place
             });
             setOptions(data.data);
+<<<<<<< HEAD
+=======
+            console.log(options);
+>>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
 
         } // ESTA PARTE DA VALOR A LA DATA QUE SE VA USAR
           // LA PARTE DE SEC_LUG ES DEL "ID" DEL PISO, SI ES 1 ES PLANTA BAJA Y ASI, EN LA PARTE DE 

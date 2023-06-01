@@ -1,11 +1,11 @@
 import mysql from "mysql2";
 
 const con=mysql.createPool({
-    host:"containers-us-west-48.railway.app",
-    user:"root",
-    password:"57sT9iuBYDvTmZo7zNop",
-    port:"6461",
-    database:"railway"
+    host:"mysql-129233-0.cloudclusters.net",
+    user:"admin",
+    password:"jafPWDyu",
+    port:"19338",
+    database:"gabow"
 });
 
 export default con;

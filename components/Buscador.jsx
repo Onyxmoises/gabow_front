@@ -58,7 +58,7 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
                         onChange={(event, newValue) => {
                             busqueda(newValue);
                         }}
-                        options={options}
+                        options={options.nom_lug}
                         groupBy={(option) => option.piso}
                         renderInput={(params) => <TextField {...params} placeholder='Buscar' variant="outlined" />}
                     />

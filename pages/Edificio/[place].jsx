@@ -126,4 +126,4 @@ const Edificio = () => {
     )
 }
 
-export default Establecimiento
+export default Edificio

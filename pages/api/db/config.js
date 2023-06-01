@@ -1,11 +1,11 @@
-import {createPool} from "mysql2/promise";
+import mysql from "mysql2";
 
-const con=createPool({
-    host:"containers-us-west-90.railway.app",
-    user:"root",
-    password:"5167sfiTZ0noZMSPx2p8",
-    port:"7950",
-    database:"railway"
+const con=mysql.createPool({
+    host:"mysql-129233-0.cloudclusters.net",
+    user:"admin",
+    password:"jafPWDyu",
+    port:"19338",
+    database:"gabow"
 });
 
 export default con;

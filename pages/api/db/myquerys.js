@@ -6,6 +6,7 @@ const myquerys ={
     deletePlace:"delete from Establecimientos where id_est=?",
     selectPlaceById:"select * from Establecimientos where id_est=?",
     getNodeList:"select * from Nodos",
+    getSubPlace:"select * from Lugares where id_est=?",
     insertSubplace:"insert into Lugares(nom_lug,sec_lug,id_est) values(?,?,?)",
     insertNode:"insert into Nodos(nom_nod,lat_nod,lon_nod,id_lug,id_est) values(?,?,?,?,?)"
 }

@@ -37,6 +37,7 @@ const Carousel = ({ sr, sv, onCambio }) => {
 
     const handleClick = (event) => {
         const clickedElement = event.target;
+        console.log(clickedElement);
         if (clickedElement.classList.contains('lim')) {
             document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
             const iden = event.target.id;

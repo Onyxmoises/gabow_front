@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Edificio from "./ShowMerge";
 import Select from "react-select"
 const PlaceReader = ({ locationId }) => {
     const [placeInfo, setPlaceInfo] = useState({});
     const [categorias, setCategorias] = useState([]);
     const [selectedOption, setSelectedOption] = useState({});
+    const [imageBase64, setImageBase64] = useState();
+    const [svgCode, setSvgCode] = useState();
     const customStyles = {
         control: (provided) => ({
             ...provided,
@@ -21,6 +24,10 @@ const PlaceReader = ({ locationId }) => {
             return acc;
         }, {});
     }
+    useEffect(() => {
+        console.log(imageBase64);
+        console.log(svgCode);
+    }, [imageBase64, svgCode])
     useEffect(() => {
         //console.log(selectedOption);
     }, [selectedOption])
@@ -53,6 +60,40 @@ const PlaceReader = ({ locationId }) => {
         fetchPLaceInfoById();
         fetchCateogorias();
     }, []);
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+            const base64String = reader.result;
+            setImageBase64(base64String);
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleSvgChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+          const svgString = reader.result;
+      
+          // Crear un elemento temporal para analizar el SVG
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(svgString, 'image/svg+xml');
+          const paths = doc.getElementsByTagName('path');
+      
+          // Aplicar la opacidad a cada elemento <path>
+          for (let i = 0; i < paths.length; i++) {
+            paths[i].setAttribute('opacity', '0.8');
+          }
+      
+          // Obtener el código SVG actualizado
+          const updatedSvgCode = new XMLSerializer().serializeToString(doc);
+          setSvgCode(updatedSvgCode);
+        };
+        reader.readAsText(file);
+    };
+
+
     const handleSelectChange = (selectedOption) => {
         setSelectedOption(selectedOption);
         setPlaceInfo({
@@ -142,6 +183,22 @@ const PlaceReader = ({ locationId }) => {
                 </li>
             </ul>
             <hr></hr>
+            <div>
+                <label htmlFor="image">Imagen:</label>
+                <input type="file" id="image" accept="image/*" onChange={handleImageChange} />
+            </div>
+            <div>
+                <label htmlFor="svg">Archivo SVG:</label>
+                <input type="file" id="svg" accept=".svg" onChange={handleSvgChange} />
+            </div>
+            {imageBase64 && svgCode ? (
+                <>    
+                    <Edificio base64Draw={imageBase64} svgCode={svgCode}/>
+                </>
+            ) : (
+                <>
+                </>
+            )}
         </>
     )
 }

@@ -41,7 +41,7 @@ const Info = ({ tipo, openInfo, closeInfo, info }) => {
                             <InfoMap info={info} />
                         }
                         {tipo == "car" &&
-                            <InfoEdi />
+                            <InfoEdi info={info} />
                         }
                     </Typography>
                 </Box>

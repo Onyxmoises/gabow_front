@@ -37,7 +37,6 @@ const Mapa = () => {
     }, [])
 
     const cambiar = selectedOption => {
-        console.log(selectedOption);
         const mapC = mapRef.current;
         const inf = selectedOption.id_est;
         const dat = data.find(item => item.id_est == inf);

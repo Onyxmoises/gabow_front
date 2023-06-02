@@ -25,13 +25,9 @@ const Edificio = () => {
 
             }
             catch (e) {
-<<<<<<< HEAD
 
                 console.log(e)
 
-=======
-                console.log(e)
->>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
             }
 
         })
@@ -48,22 +44,6 @@ const Edificio = () => {
 
                 }
                 catch (e) {
-<<<<<<< HEAD
-=======
-
-                    console.log(e)
-
-                }
-            }
-            else {
-
-                try {
-
-                    document.getElementById(secondConection).style.opacity = 1
-
-                }
-                catch (e) {
->>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
 
                     console.log(e)
 
@@ -72,7 +52,6 @@ const Edificio = () => {
             }
             else {
 
-<<<<<<< HEAD
                 try {
 
                     document.getElementById(secondConection).style.opacity = 1
@@ -86,19 +65,10 @@ const Edificio = () => {
 
             }
 
-=======
->>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
         }
     }
 
-<<<<<<< HEAD
 
-    }
-
-
-
-=======
->>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
     const [change, setChange] = useState(1)
 
     const router = useRouter()
@@ -133,11 +103,11 @@ const Edificio = () => {
     }
 
     const manejarCambio = (nuevoValor) => {
+        console.log(nuevoValor);
         setChange(nuevoValor);
     };
 
     const changeLabel = () => {
-        console.log(dat.label)
         return dat.label;
     }
 
@@ -152,15 +122,13 @@ const Edificio = () => {
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
-<<<<<<< HEAD
                     {/* <p>{dat.label}</p> */}
-=======
->>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
                     <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel} />
                 </div>
             </Snackbar>
         </>
     )
-}
+
+    }
 
 export default Edificio

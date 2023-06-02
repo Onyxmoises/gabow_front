@@ -6,17 +6,11 @@ const myquerys ={
     deletePlace:"delete from Establecimientos where id_est=?",
     selectPlaceById:"select * from Establecimientos where id_est=?",
     getNodeList:"select * from Nodos",
-<<<<<<< HEAD
     getSubPlace:"select label,sec_lug,sec from Lugares where id_est=?",
     insertSubplace:"insert into Lugares(label,sec_lug,id_est) values(?,?,?)",
     insertNode:"insert into Nodos(nom_nod,lat_nod,lon_nod,id_lug,id_est) values(?,?,?,?,?)",
     getSpecficNode:"select nom_nod,lugs_nod from Nodos",
     getSpecficNodeByCoordenate:"select nom_nod,lat_nod,lon_nod from Nodos"
-=======
-    getSubPlace:"select * from Lugares where id_est=?",
-    insertSubplace:"insert into Lugares(nom_lug,sec_lug,id_est) values(?,?,?)",
-    insertNode:"insert into Nodos(nom_nod,lat_nod,lon_nod,id_lug,id_est) values(?,?,?,?,?)"
->>>>>>> dd4f9c9c0dec85451bb57ec0abc01a6acd14538e
 }
 
 export default myquerys;

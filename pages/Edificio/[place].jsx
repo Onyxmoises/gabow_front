@@ -46,10 +46,6 @@ const Edificio = () => {
                     console.log(e)
 
                 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 41772367a34b515499bc6fdfe2e11bd7afdc5838
             }
             else {
 
@@ -67,15 +63,9 @@ const Edificio = () => {
             }
 
         }
-<<<<<<< HEAD
     }
 
 
-=======
-
-    }
-
->>>>>>> 41772367a34b515499bc6fdfe2e11bd7afdc5838
     const [change, setChange] = useState(1)
 
     const router = useRouter()
@@ -129,10 +119,7 @@ const Edificio = () => {
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
-<<<<<<< HEAD
                     {/* <p>{dat.label}</p> */}
-=======
->>>>>>> 41772367a34b515499bc6fdfe2e11bd7afdc5838
                     <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel} />
                 </div>
             </Snackbar>

@@ -1,6 +1,6 @@
-import mysql from "mysql2";
+import {createPool} from "mysql2/promise";
 
-const con=mysql.createPool({
+const con=createPool({
     host:"mysql-129233-0.cloudclusters.net",
     user:"admin",
     password:"jafPWDyu",

@@ -12,6 +12,9 @@ const InfoEdi = ({ info }) => {
       <Typography>
         <Button variant="contained" href={`/`} >Regresar</Button>
       </Typography>
+      <Typography>
+        <Button variant="contained" href={`/`} >Empezar ruta</Button>
+      </Typography>
     </>
   )
 }

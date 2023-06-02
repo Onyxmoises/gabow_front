@@ -65,6 +65,7 @@ const Edificio = () => {
         }
     }
 
+
     const [change, setChange] = useState(1)
 
     const router = useRouter()
@@ -99,11 +100,11 @@ const Edificio = () => {
     }
 
     const manejarCambio = (nuevoValor) => {
+        console.log(nuevoValor);
         setChange(nuevoValor);
     };
 
     const changeLabel = () => {
-        console.log(dat.label)
         return dat.label;
     }
 
@@ -118,11 +119,13 @@ const Edificio = () => {
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
+                    {/* <p>{dat.label}</p> */}
                     <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel} />
                 </div>
             </Snackbar>
         </>
     )
-}
+
+    }
 
 export default Edificio

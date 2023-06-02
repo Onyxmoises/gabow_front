@@ -1,27 +1,24 @@
+import { format } from "mysql2"
 import con from "../db/config"
 import myquerys from "../db/myquerys"
 
-const getSpecficNode = (req , res) =>{
+const getSpecficNode = async(req , res) =>{
     const {label} = req.body
-    con.query(myquerys.getSpecficNode, (err , response)=>{
-        if(err){
+    try{
+        const response=await con.query(myquerys.getSpecficNode);
+        response[0].data.map(item =>{
 
-            res.status(500).json({status:'SOMETHING WENT WRONG',error:err})
-        }
-        else{
+            if((item[lugs_nod].split(",")).includes(label)){
 
-            response.data.map(item =>{
+                res.status(200).json({status:'OK',data:item[nom_nod]});
 
-                if((item[lugs_nod].split(",")).includes(label)){
+            }
 
-                    res.status(200).json({status:'OK',data:item[nom_nod]});
+        })
+    }catch(err){
+        res.status(500).json({status:'SOMETHING WENT WRONG',error:err});
+    }
 
-                }
-
-            })
-            
-        }
-    })
 }
 
 export default getSpecficNode

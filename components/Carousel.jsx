@@ -44,8 +44,9 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
         const clickedElement = event.target;
         if (clickedElement.classList.contains('lim')) {
             document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
-            const iden = event.target;
-            console.log(options)
+            const iden = event.target.id;
+            const info = options.find((object) => object.label === iden).label;
+            setRoom(info);
             event.currentTarget.querySelector(`#${iden}`).setAttribute('opacity', '.7');
             event.currentTarget.querySelector(`#${iden}`).setAttribute('fill', '#66c0f4');
             setOpenInfo(true);
@@ -64,7 +65,7 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
                 <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} id='map' />
             </div>
 
-            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"car"} nom={room} room={room}/>
+            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"car"} info={room}/>
 
             <Buscador onCambio={onCambio} options={options} setOpenInfo={setOpenInfo} setRoom={setRoom} />
 

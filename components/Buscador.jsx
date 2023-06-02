@@ -37,7 +37,6 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
         if (event == null) {
 
         } else {
-            console.log(event.sec_lug)
             const lugar = event.sec_lug;
             const label = event.label;
             const id = event.label;

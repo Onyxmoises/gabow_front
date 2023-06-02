@@ -66,11 +66,9 @@ const Edificio = () => {
             }
 
         }
-
-
     }
 
-
+    }
 
     const [change, setChange] = useState(1)
 
@@ -83,12 +81,13 @@ const Edificio = () => {
     const { place } = router.query
 
     const data = [
-        { label: "PB", sr: `/${place}/PB.jpg`, sv: `/${place}/PB.svg` },
-        { label: "P01", sr: `/${place}/P01.jpg`, sv: `/${place}/P01.svg` },
-        { label: "P02", sr: `/${place}/P02.jpg`, sv: `/${place}/P02.svg` },
-        { label: "P03", sr: `/${place}/P03.jpg`, sv: `/${place}/P03.svg` },
-    ];
-       
+        { label: "GEN", sr: `/${place}/GEN.jpg`, sv: `/${place}/GEN.svg`, ss: `/${place}/GEN.png` },
+        { label: "PB", sr: `/${place}/PB.jpg`, sv: `/${place}/PB.svg`, ss: `/${place}/PB.png` },
+        { label: "P01", sr: `/${place}/P01.jpg`, sv: `/${place}/P01.svg`, ss: `/${place}/P01.png` },
+        { label: "P02", sr: `/${place}/P02.jpg`, sv: `/${place}/P02.svg`, ss: `/${place}/P02.png` },
+        { label: "P03", sr: `/${place}/P03.jpg`, sv: `/${place}/P03.svg`, ss: `/${place}/P03.png` },
+    ]
+
     const typePlace = {
 
         1: 'Batiz_Graph',
@@ -120,11 +119,10 @@ const Edificio = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Carousel sr={dat.sr} sv={dat.sv} place={place} onCambio={manejarCambio} />
+            <Carousel sr={dat.sr} sv={dat.sv} ss={dat.ss} place={place} onCambio={manejarCambio} />
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
-                    {/* <p>{dat.label}</p> */}
                     <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel} />
                 </div>
             </Snackbar>

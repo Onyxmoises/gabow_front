@@ -29,6 +29,7 @@ const InfoMap = ({ info }) => {
                 {/* NOMBRE */}
                 <Typography variant='h6' role='presentation'>
                     {info.est_nombre}
+                    {console.log(info)}
                 </Typography>
 
                 {/* Boton IR A */}

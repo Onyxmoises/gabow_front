@@ -103,11 +103,6 @@ const Edificio = () => {
         setChange(nuevoValor);
     };
 
-    const changeLabel = () => {
-        console.log(dat.label)
-        return dat.label;
-    }
-
     return (
         <>
             <Head>
@@ -119,7 +114,7 @@ const Edificio = () => {
 
             <Snackbar open anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} className={styles.sna}>
                 <div className={styles.arrows}>
-                    <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton getItemAriaLabel={changeLabel} />
+                    <Pagination count={nDat} page={change} onChange={arrowsAcction} siblingCount={0} boundaryCount={0} showFirstButton showLastButton />
                 </div>
             </Snackbar>
         </>

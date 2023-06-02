@@ -20,7 +20,7 @@ const Inicio = () => {
             </Snackbar>
             <Modal open={open} onClose={() => setOpen(false)}>
                 <Box className={styles.mo}>
-                    hola
+                    Inicio
                 </Box>
             </Modal>
         </>

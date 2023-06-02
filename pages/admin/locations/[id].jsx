@@ -193,7 +193,7 @@ const PlaceReader = ({ locationId }) => {
             </div>
             {imageBase64 && svgCode ? (
                 <>    
-                    <Edificio base64Draw={imageBase64} svgCode={svgCode}/>
+                    <Edificio base64Draw={imageBase64} svgCode={svgCode} id_est={placeInfo.id_est}/>
                 </>
             ) : (
                 <>

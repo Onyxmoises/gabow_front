@@ -9,7 +9,8 @@ const myquerys ={
     getSubPlace:"select * from Lugares where id_est=?",
     insertSubplace:"insert into Lugares(nom_lug,sec_lug,id_est) values(?,?,?)",
     insertNode:"insert into Nodos(nom_nod,lat_nod,lon_nod,id_lug,id_est) values(?,?,?,?,?)",
-    updatePlace:`updatePlace:"update Establecimientos set est_nombre=?,est_descripcion=?,est_horaApertura=?,est_horaCierre=?,est_paginaWeb=?,est_latitud=?,est_longitud=?,id_catalogo=? where id_est=?`
+    updatePlace:`updatePlace:"update Establecimientos set est_nombre=?,est_descripcion=?,est_horaApertura=?,est_horaCierre=?,est_paginaWeb=?,est_latitud=?,est_longitud=?,id_catalogo=? where id_est=?`,
+    addSpace:"insert into Espacios(esp_nombre,id_est) values(?,?)"
 }
 
 export default myquerys;

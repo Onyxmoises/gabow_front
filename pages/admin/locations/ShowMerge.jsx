@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Carousel from './CarouselModified'
 import styles from '../../../styles/Edificio.module.scss'
 
-const Edificio = ({base64Draw,svgCode}) => {
+const Edificio = ({base64Draw,svgCode,id_est}) => {
 
     const [change, setChange] = useState(1)
 
@@ -25,7 +25,7 @@ const Edificio = ({base64Draw,svgCode}) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Carousel sr={dat.sr} sv={dat.sv} onCambio={manejarCambio} />
+            <Carousel sr={dat.sr} sv={dat.sv} onCambio={manejarCambio} id_est={id_est}/>
         </>
     )
 }

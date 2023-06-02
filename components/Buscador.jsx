@@ -37,9 +37,9 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
         if (event == null) {
 
         } else {
-            const lugar = event.lugar;
+            const lugar = event.sec_lug;
             const label = event.label;
-            const id = event.id;
+            const id = event.label;
 
             await camPiso(lugar);
             await camInfo(label);
@@ -58,8 +58,8 @@ const Buscador = ({ onCambio, options, setOpenInfo, setRoom }) => {
                         onChange={(event, newValue) => {
                             busqueda(newValue);
                         }}
-                        options={options.nom_lug}
-                        groupBy={(option) => option.piso}
+                        options={options}
+                        groupBy={(option) => option.sec}
                         renderInput={(params) => <TextField {...params} placeholder='Buscar' variant="outlined" />}
                     />
                 </div>

@@ -125,6 +125,7 @@ const Edificio = () => {
             </Snackbar>
         </>
     )
-}
+
+    }
 
 export default Edificio

@@ -23,11 +23,8 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
                 id_est:place
             });
             setOptions(data.data);
-            console.log(options);
 
-        } // ESTA PARTE DA VALOR A LA DATA QUE SE VA USAR
-          // LA PARTE DE SEC_LUG ES DEL "ID" DEL PISO, SI ES 1 ES PLANTA BAJA Y ASI, EN LA PARTE DE 
-          // DARLES ID A LOS LUGARES DALES DE ID EL NOMBRE SI PUEDES Y TE ES MAS COMODO
+        } 
         getSubPlaces();
 
         fetch(sv)
@@ -49,7 +46,7 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
         if (clickedElement.classList.contains('lim')) {
             document.querySelectorAll('.lim').forEach(element => { element.setAttribute('opacity', '0') });
             const iden = event.target.id;
-            const info = options.find((object) => object.id === iden).label;
+            const info = options.find((object) => object.label === iden).label;
             setRoom(info);
             event.currentTarget.querySelector(`#${iden}`).setAttribute('opacity', '.7');
             event.currentTarget.querySelector(`#${iden}`).setAttribute('fill', '#66c0f4');
@@ -69,7 +66,7 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
                 <div dangerouslySetInnerHTML={{ __html: svgCode }} className={styles.edi4} onClick={handleClick} id='map' />
             </div>
 
-            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"car"} nom={room} room={room}/>
+            <Info openInfo={openInfo} closeInfo={closeInfo} tipo={"car"} info={room}/>
 
             <Buscador onCambio={onCambio} options={options} setOpenInfo={setOpenInfo} setRoom={setRoom} />
 

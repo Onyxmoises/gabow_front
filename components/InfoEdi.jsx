@@ -1,10 +1,18 @@
 import React from 'react'
-import { Button } from "@mui/material"
+import { Button, Typography } from "@mui/material"
 import styles from '../styles/Info.module.scss';
 
-const InfoEdi = () => {
+const InfoEdi = ({ info }) => {
   return (
-    <Button variant="contained" href={`/`} >Regresar</Button>
+    <>
+      <Typography>
+        {info}
+      </Typography>
+
+      <Typography>
+        <Button variant="contained" href={`/`} >Regresar</Button>
+      </Typography>
+    </>
   )
 }
 

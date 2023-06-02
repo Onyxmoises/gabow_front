@@ -74,10 +74,6 @@ const Edificio = () => {
 
     const router = useRouter()
 
-    if (!router.isReady) {
-        return <div>Cargando...</div>;
-    }
-
     const { place } = router.query
 
     const data = [

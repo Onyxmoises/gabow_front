@@ -65,6 +65,7 @@ const ConfigForm = ({id_est}) => {
                 }
                 break;
             case "addNode":
+                console.log("hola");
                 break;
         }
     };

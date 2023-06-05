@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from '../../../styles/Carousel.module.scss'
 import Modal from '../../../components/Modal';
 import axios from 'axios';
@@ -22,13 +22,13 @@ const Carousel = ({ sr, sv, onCambio, id_est }) => {
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
     };
-    const handleSaveChanges = async() => {
+    const handleSaveChanges = async () => {
         console.log(svgContainerRef.current.innerHTML);
-        const {data}=await axios.post("/api/handlers/updateSvg",{
-            newSvg:svgContainerRef.current.innerHTML,
-            id_est:id_est
+        const { data } = await axios.post("/api/handlers/updateSvg", {
+            newSvg: svgContainerRef.current.innerHTML,
+            id_est: id_est
         });
-        if(data.status=="ok"){
+        if (data.status == "ok") {
             window.location.reload();
         }
     }
@@ -64,7 +64,31 @@ const Carousel = ({ sr, sv, onCambio, id_est }) => {
                         });
                     }
                 }
-                await insertSpace();
+                //await insertSpace();
+                const updateSpace = async () => {
+                    const { data } = await axios.post("/api/handlers/updateSvgId", {
+                        newName: event.target.esp_nombre.value,
+                        oldName: svgElement.id
+                    });
+                    svgElement.setAttribute("id", event.target.esp_nombre.value);
+                    setIsModalOpen(false);
+                    toast.success(`Edificio correcatamente actualizado!`, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                };
+                svgElement.id?await updateSpace():await insertSpace();
+                /*if(svgElement.id){
+                    console.log("ya tiene id");
+                }else{
+                    await insertSpace();
+                }*/
                 break;
             case "addNode":
                 console.log("hola");

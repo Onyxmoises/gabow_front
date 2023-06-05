@@ -14,7 +14,8 @@ const myquerys ={
     insertGeneralImage:"insert into VistaGeneral(img_dibujo,img_svg,id_est) values(?,?,?)",
     getGeneralImage:"select convert(img_dibujo using utf8) as img_dibujo, convert(img_svg using utf8) as img_svg from VistaGeneral where id_est=?",
     getIdImgGeneral:"select * from VistaGeneral where id_est=?",
-    updateSvg:"update VistaGeneral set img_svg=? where id_est=?"
+    updateSvg:"update VistaGeneral set img_svg=? where id_est=?",
+    updateSpace:"update Espacios set esp_nombre=? where esp_nombre=? "
 }
 
 export default myquerys;

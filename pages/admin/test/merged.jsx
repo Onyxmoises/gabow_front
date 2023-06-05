@@ -14,7 +14,6 @@ const ImageMergeForm = () => {
     reader.onload = () => {
       setImage(reader.result);
     };
-
     reader.readAsDataURL(file);
   };
 

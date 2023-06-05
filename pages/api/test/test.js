@@ -1,13 +1,11 @@
-// import axios from "axios";
-// import con from "../db/config";
-// import Select from "react-select/dist/declarations/src/Select";
-
-// export default function(req, res){
-
-//     con.query("select * from Establecimientos" , (err , result) =>{
-
-//         res.status(200).json({'result' : result})
-        
-//     })
-
-// }
+import { format } from "mysql2";
+import con from "../db/config";
+import myquerys from "../db/myquerys";
+export default async function(req,res){
+    const query=format(myquerys.getGeneralImage,[1]);
+    const response=await con.query(query);
+    return res.status(200).json({
+        status:"ok",
+        result:response
+    });
+}

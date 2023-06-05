@@ -18,25 +18,7 @@ const getSpecficNode = async(req , res) =>{
     }catch(err){
         res.status(500).json({status:'SOMETHING WENT WRONG',error:err});
     }
-    /*con.query(myquerys.getSpecficNode, (err , response)=>{
-        if(err){
 
-            res.status(500).json({status:'SOMETHING WENT WRONG',error:err})
-        }
-        else{
-
-            response.data.map(item =>{
-
-                if((item[lugs_nod].split(",")).includes(label)){
-
-                    res.status(200).json({status:'OK',data:item[nom_nod]});
-
-                }
-
-            })
-            
-        }
-    })*/
 }
 
 export default getSpecficNode

@@ -8,6 +8,10 @@ import axios from 'axios'
 
 const Edificio = () => {
 
+    useEffect(()=>{
+        
+    }); 
+
 
     const [change, setChange] = useState(1)
 
@@ -22,14 +26,6 @@ const Edificio = () => {
         { label: "P02", sr: `/${place}/P02.jpg`, sv: `/${place}/P02.svg`, ss: `/${place}/P02.png` },
         { label: "P03", sr: `/${place}/P03.jpg`, sv: `/${place}/P03.svg`, ss: `/${place}/P03.png` },
     ]
-
-    const typePlace = {
-
-        1: 'Batiz_Graph',
-        2: 'TownCenter_Graph',
-        3: 'ChapultepecSeccion1_Graph'
-
-    };
 
     const dat = data[change - 1];
     const nDat = data.length;
@@ -47,67 +43,7 @@ const Edificio = () => {
         return dat.label;
     }
     useEffect(() => {
-        const getInfoRoute = async () => {
-
-            const reference = typePlace[place]
-
-            const { data } = await axios.get(`https://emiliorifaschidopro.pythonanywhere.com/getRoute?i=${i}&d=${d}&reference=${reference}`, {})
-
-            console.log(data.graph_Data.shortestPath)
-
-            const shortest_Route = data.graph_Data.shortestPath;
-            shortest_Route.map(node => {
-
-                try {
-
-                    if (document.getElementById(node) != null) { document.getElementById(node).style.opacity = 1 }
-
-                }
-                catch (e) {
-
-                    console.log(e)
-
-                }
-
-            })
-            for (let index = 0; index < shortest_Route.length; index++) {
-
-                const firstConection = shortest_Route[index] + '-' + shortest_Route[index + 1]
-                const secondConection = shortest_Route[index + 1] + '-' + shortest_Route[index]
-
-                if (document.getElementById(firstConection) != null) {
-
-                    try {
-
-                        document.getElementById(firstConection).style.opacity = 1
-
-                    }
-                    catch (e) {
-
-                        console.log(e)
-
-                    }
-
-                }
-                else {
-
-                    try {
-
-                        document.getElementById(secondConection).style.opacity = 1
-
-                    }
-                    catch (e) {
-
-                        console.log(e)
-
-                    }
-
-                }
-
-            }
-
-
-        }
+        
     });
     return (
         <>

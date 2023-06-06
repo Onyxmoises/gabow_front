@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import Edificio from "./ShowMerge";
 import Select from "react-select"
 const PlaceReader = ({ locationId }) => {
     const [placeInfo, setPlaceInfo] = useState({});
     const [categorias, setCategorias] = useState([]);
     const [selectedOption, setSelectedOption] = useState({});
-    const [imageBase64, setImageBase64] = useState();
-    const [svgCode, setSvgCode] = useState();
-    const [isImageRegistered, setImageResgistered] = useState(false);
     const customStyles = {
         control: (provided) => ({
             ...provided,
@@ -24,10 +20,6 @@ const PlaceReader = ({ locationId }) => {
             return acc;
         }, {});
     }
-    useEffect(() => {
-        //console.log(imageBase64);
-        console.log(svgCode);
-    }, [imageBase64, svgCode])
     useEffect(() => {
         //console.log(selectedOption);
     }, [selectedOption])
@@ -57,65 +49,9 @@ const PlaceReader = ({ locationId }) => {
             //console.log(categoriasArray);
             setCategorias(categoriasArray);
         }
-        const fetchGeneralImage = async () => {
-            const { data } = await axios.post("/api/handlers/getGeneralImage", {
-                id_est: locationId
-            });
-            console.log(data);
-            if (data.result.length != 0) {
-                setImageResgistered(true);
-                setImageBase64(data.result[0].img_dibujo);
-                setSvgCode(data.result[0].img_svg);
-            }
-        }
-        fetchGeneralImage();
         fetchPLaceInfoById();
         fetchCateogorias();
     }, []);
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-            const base64String = reader.result;
-            setImageBase64(base64String);
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const handleSvgChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-            const svgString = reader.result;
-
-            // Crear un elemento temporal para analizar el SVG
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(svgString, 'image/svg+xml');
-            const paths = doc.getElementsByTagName('path');
-
-            // Aplicar la opacidad a cada elemento <path>
-            for (let i = 0; i < paths.length; i++) {
-                paths[i].setAttribute('opacity', '0.8');
-            }
-
-            // Obtener el código SVG actualizado
-            const updatedSvgCode = new XMLSerializer().serializeToString(doc);
-            setSvgCode(updatedSvgCode);
-        };
-        reader.readAsText(file);
-    };
-    const handleRegisterImageForm=async(event)=>{
-        event.preventDefault();
-        const {data}=await axios.post("/api/handlers/addGeneralPlace",{
-            img_dibujo:imageBase64,
-            img_svg:svgCode,
-            id_est:locationId
-        });
-        if(data.status=="ok"){
-            window.location.reload();
-        }
-    }
-
     const handleSelectChange = (selectedOption) => {
         setSelectedOption(selectedOption);
         setPlaceInfo({
@@ -126,6 +62,7 @@ const PlaceReader = ({ locationId }) => {
     }
     const hanldeInputChange = (e) => {
         const { name, value } = e.target;
+        //console.log(name, value);
         setPlaceInfo({
             ...placeInfo,
             [name]: value
@@ -204,53 +141,6 @@ const PlaceReader = ({ locationId }) => {
                 </li>
             </ul>
             <hr></hr>
-            {isImageRegistered ? (
-                <>
-                    <Edificio base64Draw={imageBase64} svgCode={svgCode} id_est={placeInfo.id_est} />
-                </>
-            ) : (
-                <>
-                    <form onSubmit={handleRegisterImageForm}>
-                        <table border={1} style={{ textAlign: "center" }}>
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        Imagen JPG o PNG:
-                                    </th>
-                                    <td>
-                                        <input type="file" id="image" accept="image/*" onChange={handleImageChange} />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Archivo SVG:
-                                    </th>
-                                    <td>
-                                        <input type="file" id="svg" accept=".svg" onChange={handleSvgChange} />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button type="submit">Subir Imagen General</button>
-                    </form>
-                </>
-            )}
-            {/*<div>
-                <label htmlFor="image">Imagen:</label>
-                <input type="file" id="image" accept="image/*" onChange={handleImageChange} />
-            </div>
-            <div>
-                <label htmlFor="svg">Archivo SVG:</label>
-                <input type="file" id="svg" accept=".svg" onChange={handleSvgChange} />
-            </div>*/}
-            {/*imageBase64 && svgCode ? (
-                <>    
-                    <Edificio base64Draw={imageBase64} svgCode={svgCode} id_est={placeInfo.id_est}/>
-                </>
-            ) : (
-                <>
-                </>
-            )*/}
         </>
     )
 }
@@ -262,14 +152,14 @@ import { useRouter } from 'next/router'
 //import Carousel from "../../../components/Carousel";
 import styles from "../../../styles/Edificio.module.scss";
 
-
 const Edificio = ({drawBase64,svgCode}) => {
 
     const [change, setChange] = useState(1)
 
-    const router = useRouter()
+    const router = useRout0.er()
 
     if (!router.isReady) {
+        
         return <div>Cargando...</div>;
     }
 

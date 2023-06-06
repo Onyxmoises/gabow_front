@@ -14,15 +14,17 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
     const [room, setRoom] = useState("");
     const [svgCode, setSvgCode] = useState('');
     const [sen, setSen] = useState(false);
-    
+    useEffect(()=>{
+        console.log(options);
+    },[options])
     useEffect(() => {
-
+        
         const getSubPlaces = async() =>{
 
-            const {data} = await axios.post("/api/handlers/getSubPlaces" , {
+            const {data} = await axios.post("/api/handlers/getLugares" , {
                 id_est:place
             });
-            setOptions(data.data);
+            setOptions(data.result);
 
         } 
         getSubPlaces();

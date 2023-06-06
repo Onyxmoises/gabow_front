@@ -15,7 +15,10 @@ const myquerys ={
     getGeneralImage:"select convert(img_dibujo using utf8) as img_dibujo, convert(img_svg using utf8) as img_svg from VistaGeneral where id_est=?",
     getIdImgGeneral:"select * from VistaGeneral where id_est=?",
     updateSvg:"update VistaGeneral set img_svg=? where id_est=?",
-    updateSpace:"update Espacios set esp_nombre=? where esp_nombre=? "
+    updateSpace:"update Espacios set esp_nombre=? where esp_nombre=? ",
+    insertSections:"insert into Secciones(sec_nombre,sec_dibujo.sec_svg,sec_sennalizacion,id_est) values(?,?,?,?,?)",
+    addLugar:"insert into Lugares(label,sec_lug,id_est,sec) values(?,?,?,?)",
+    addNode:`INSERT INTO Nodos(nom_nod, lugs_nod, id_est) VALUES (?, REPLACE("?", '"', ''), ?)`
 }
 
 export default myquerys;

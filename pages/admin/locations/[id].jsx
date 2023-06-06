@@ -58,18 +58,6 @@ const PlaceReader = ({ locationId }) => {
             //console.log(categoriasArray);
             setCategorias(categoriasArray);
         }
-        const fetchGeneralImage = async () => {
-            const { data } = await axios.post("/api/handlers/getGeneralImage", {
-                id_est: locationId
-            });
-            console.log(data);
-            if (data.result.length != 0) {
-                setImageResgistered(true);
-                setImageBase64(data.result[0].img_dibujo);
-                setSvgCode(data.result[0].img_svg);
-            }
-        }
-        fetchGeneralImage();
         fetchPLaceInfoById();
         fetchCateogorias();
     }, []);
@@ -105,14 +93,14 @@ const PlaceReader = ({ locationId }) => {
         };
         reader.readAsText(file);
     };
-    const handleRegisterImageForm=async(event)=>{
+    const handleRegisterImageForm = async (event) => {
         event.preventDefault();
-        const {data}=await axios.post("/api/handlers/addGeneralPlace",{
-            img_dibujo:imageBase64,
-            img_svg:svgCode,
-            id_est:locationId
+        const { data } = await axios.post("/api/handlers/addGeneralPlace", {
+            img_dibujo: imageBase64,
+            img_svg: svgCode,
+            id_est: locationId
         });
-        if(data.status=="ok"){
+        if (data.status == "ok") {
             window.location.reload();
         }
     }
@@ -140,6 +128,11 @@ const PlaceReader = ({ locationId }) => {
             window.location.reload();
         }
     }
+    const [isSelected, setIsSelected] = useState(false);
+
+    const handleToggleSelection = () => {
+        setIsSelected(!isSelected);
+    };
     return (
         <>
             <Link href="/admin/locations">
@@ -205,7 +198,8 @@ const PlaceReader = ({ locationId }) => {
                 </li>
             </ul>
             <hr></hr>
-            {isImageRegistered ? (
+            <DynamicTable id_est={locationId} />
+            {/*isImageRegistered ? (
                 <>
                     <Edificio base64Draw={imageBase64} svgCode={svgCode} id_est={placeInfo.id_est} />
                 </>
@@ -255,6 +249,186 @@ const PlaceReader = ({ locationId }) => {
         </>
     )
 }
+
+
+const DynamicTable = ({ id_est }) => {
+    const [rows, setRows] = useState([{}]);
+    const [svgCode,setSvgCode]=useState();
+    const [dibujo,setDibujo]=useState();
+    useEffect(() => {
+        console.log(rows);
+    }, [rows]);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+
+        rows.forEach((row, index) => {
+            formData.append(`rows[${index}].nombre`, row.nombre);
+            formData.append(`rows[${index}].dibujo`, row.dibujo);
+            formData.append(`rows[${index}].svg`, row.svg);
+            formData.append(`rows[${index}].señalizaciones`, row.señalizaciones);
+        });
+
+        try {
+            await axios.post('/api/handlers/addSections', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('Datos enviados correctamente');
+        } catch (error) {
+            console.error('Error al enviar los datos', error);
+        }
+
+    }
+
+    const addRow = () => {
+        const newRow = {
+            nombre: "",
+            dibujo: null,
+            svg: "",
+            señalizaciones: null,
+        };
+
+        setRows([...rows, newRow]);
+    };
+
+    const removeRow = (index) => {
+        const updatedRows = [...rows];
+        updatedRows.splice(index, 1);
+        setRows(updatedRows);
+    };
+
+    const handleNombreChange = (event, index) => {
+        const updatedRows = [...rows];
+        updatedRows[index].nombre = event.target.value;
+        setRows(updatedRows);
+    };
+
+    const handleDibujoChange = (event, index) => {
+        const file = event.target.files[0];
+
+        if (file && file.type === "image/jpeg") {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                setDibujo(reader.result);
+                /*const updatedRows = [...rows];
+                updatedRows[index].dibujo = reader.result;
+                setRows(updatedRows);*/
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
+
+    /*const handleSvgChange = (event, index) => {
+        const file = event.target.files[0];
+
+        if (file && file.type === "image/svg+xml") {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                const updatedRows = [...rows];
+                updatedRows[index].svg = reader.result;
+                setRows(updatedRows);
+            };
+
+            reader.readAsText(file);
+        }
+    };*/
+
+    const handleSeñalizacionesChange = (event, index) => {
+        const file = event.target.files[0];
+
+        if (file && file.type === "image/png") {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                const updatedRows = [...rows];
+                updatedRows[index].señalizaciones = reader.result;
+                setRows(updatedRows);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
+    const handleSvgChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+            const svgString = reader.result;
+
+            // Crear un elemento temporal para analizar el SVG
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(svgString, 'image/svg+xml');
+            const paths = doc.getElementsByTagName('path');
+
+            // Aplicar la opacidad a cada elemento <path>
+            for (let i = 0; i < paths.length; i++) {
+                paths[i].setAttribute('opacity', '0.8');
+            }
+
+            // Obtener el código SVG actualizado
+            const updatedSvgCode = new XMLSerializer().serializeToString(doc);
+            setSvgCode(updatedSvgCode);
+        };
+        reader.readAsText(file);
+    };
+    return (
+        <>
+            <button onClick={addRow}>Agregar Fila</button>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <table border={1} style={{ textAlign: "center" }}>
+                        <thead>
+                            <tr>
+                                <th>Dibujo</th>
+                                <th>SVG</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows.map((row, index) => (
+                                <tr key={index}>
+
+                                    <td>
+                                        <input
+                                            type="file"
+                                            accept="image/jpeg"
+                                            onChange={(event) => handleDibujoChange(event, index)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="file"
+                                            accept="image/svg+xml"
+                                            onChange={(event) => handleSvgChange(event, index)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <button onClick={() => removeRow(index)}>Eliminar</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                </div>
+            </form>
+            {dibujo&&svgCode? (
+                <>
+                    <Edificio base64Draw={dibujo} svgCode={ svgCode} id_est={id_est} />
+                </>
+            ) : (
+                <>
+                </>
+            )}
+        </>
+    );
+};
+
 
 
 export async function getServerSideProps(context) {

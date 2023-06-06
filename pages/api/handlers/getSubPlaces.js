@@ -9,7 +9,7 @@ const getSubPlaces = async (req, res) => {
         const response = await con.query(query);
         return res.status(200).json({
             status: "ok",
-            data: response[0]
+            result: response[0]
         });
     } catch (err) {
         return res.status(400).json({

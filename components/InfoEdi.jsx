@@ -9,12 +9,17 @@ const InfoEdi = ({ info }) => {
       <Typography>
         {info}
       </Typography>
-
+      <br />
       <Typography>
         <Button variant="contained" href={`/`} >Regresar</Button>
       </Typography>
+      <br />
       <Typography>
         <Button variant="contained" href={`/`} >Empezar ruta</Button>
+      </Typography>
+      <br />
+      <Typography>
+        <Button variant="contained" href="https://tour-weld.vercel.app/"  >Inside View</Button>
       </Typography>
     </>
   )

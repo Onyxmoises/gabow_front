@@ -17,7 +17,7 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
     
     useEffect(() => {
 
-        const getSubPlaces = async() =>{
+        /*const getSubPlaces = async() =>{
 
             const {data} = await axios.post("/api/handlers/getSubPlaces" , {
                 id_est:place
@@ -25,7 +25,7 @@ const Carousel = ({ sr, sv, ss, place, onCambio }) => {
             setOptions(data.data);
 
         } 
-        getSubPlaces();
+        getSubPlaces();*/
 
         fetch(sv)
             .then(response => response.text())

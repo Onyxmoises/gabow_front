@@ -9,7 +9,7 @@ import axios from 'axios';
 import Ley from './Ley'
 import Info from './Info'
 
-const Mapa = () => {
+const Mapa = ({ location }) => {
 
     const mapRef = useRef();
     const markerRef = useRef();
@@ -93,6 +93,12 @@ const Mapa = () => {
                     {data.map((item) => (
                         <Marker key={item.id_est} id={item.id_est} position={[item.est_latitud, item.est_longitud]} icon={new Icon({ iconUrl: item.imgBase64, iconSize: [50, 50] })} eventHandlers={{ click: onClick }} />
                     ))}
+
+                    {location ? (
+                        <>
+                            <Marker position={location} icon={new Icon({ iconUrl:"./favicon.ico", iconSize: [50, 50] })} />
+                        </>
+                    ) : null}
 
                 </MapContainer>
             </div>

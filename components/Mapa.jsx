@@ -9,32 +9,31 @@ import axios from 'axios';
 import Ley from './Ley'
 import Info from './Info'
 
+const Places = [
+    {
+        id_est: 5,
+        est_latitud: 19.45361372364191,
+        est_longitud: -99.17536925858711,
+        est_iconUrl: "/icons/escuela.png",
+        est_nombre: "CECyT 9"
+    },
+    {
+        id_est: 3,
+        est_latitud: 19.42104635225278,
+        est_longitud: -99.1857119382349,
+        est_iconUrl: "/icons/fountain (4).png",
+        est_nombre: "Bosque de chapultepec"
+    }
+]
+
 const Mapa = ({ location }) => {
 
     const mapRef = useRef();
-    const markerRef = useRef();
 
     const [openInfo, setOpenInfo] = useState(false);
     const [cord, setCord] = useState([19.472819274952897, -99.14333273147834]);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(Places);
     const [info, setInfo] = useState({});
-
-    useEffect(() => {
-
-        const getMarkerData = async () => {
-
-            const { data } = await axios.post("/api/handlers/getMarkerDataHandler", {})
-            data.result.map((item, index) => {
-                data.result[index] = { ...item, label: item.est_nombre };
-            })
-            setData(data.result)
-            console.log(data.result);
-
-        }
-
-        getMarkerData();
-
-    }, [])
 
     const cambiar = selectedOption => {
         const mapC = mapRef.current;
@@ -90,15 +89,9 @@ const Mapa = ({ location }) => {
 
                     <ResetViewControl position='bottomleft' icon="url(/pointer.png)" />
 
-                    {data.map((item) => (
-                        <Marker key={item.id_est} id={item.id_est} position={[item.est_latitud, item.est_longitud]} icon={new Icon({ iconUrl: item.imgBase64, iconSize: [50, 50] })} eventHandlers={{ click: onClick }} />
+                    {Places.map((item) => (
+                        <Marker key={item.id_est} id={item.id_est} position={[item.est_latitud, item.est_longitud]} icon={new Icon({ iconUrl: item.est_iconUrl, iconSize: [50, 50] })} eventHandlers={{ click: onClick }} />
                     ))}
-
-                    {location ? (
-                        <>
-                            <Marker position={location} icon={new Icon({ iconUrl:"./favicon.ico", iconSize: [50, 50] })} />
-                        </>
-                    ) : null}
 
                 </MapContainer>
             </div>

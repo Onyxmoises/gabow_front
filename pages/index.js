@@ -5,17 +5,6 @@ const MyAwesomeMap = dynamic(() => import("../components/Mapa"), { ssr: false })
 
 const Index = () => {
 
-    const [userLocation,setUserLocation]=useState();
-
-    useEffect(()=>{
-        const success=(pos)=>{
-            setUserLocation([pos.coords.latitude,pos.coords.longitude]);
-        }
-        const error=err=>{
-            console.log(err);
-        }
-        navigator.geolocation.getCurrentPosition(success,error);
-    })
 
     return (
         <>
@@ -24,7 +13,7 @@ const Index = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <MyAwesomeMap location={userLocation} />
+            <MyAwesomeMap  />
             
         </>
     )

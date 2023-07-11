@@ -22,10 +22,6 @@ const InfoEdi = ({ info }) => {
       <Typography>
         <Button variant="contained" href="https://tour-weld.vercel.app/"  >Inside View</Button>
       </Typography>
-      <br />
-      <Typography>
-        <Button variant="contained" href="https://tour-weld.vercel.app/"  >Inside View</Button>
-      </Typography>
     </>
   )
 }

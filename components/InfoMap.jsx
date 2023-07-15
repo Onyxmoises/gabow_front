@@ -29,14 +29,27 @@ const InfoMap = ({ info }) => {
                 {/* NOMBRE */}
                 <Typography variant='h6' role='presentation'>
                     {info.est_nombre}
-                    {console.log(info)}
                 </Typography>
 
                 {/* Boton IR A */}
                 <Typography>
                     <Button variant="contained" href={`/Edificio/${info.id_est}`} >ir a</Button>
                 </Typography>
-
+                {info.display_name && info.cords ? (
+                    <>
+                        <br></br>
+                        <Typography variant='h6' role='presentation'>
+                            {info.display_name}
+                        </Typography>
+                        <br></br>
+                        <Typography variant='h6' role='presentation'>
+                            Latitud: {info.cords[0]}
+                        </Typography>
+                        <Typography variant='h6' role='presentation'>
+                            Longitud: {info.cords[1]}
+                        </Typography>
+                    </>
+                ) : null}
                 {/* HORARIO */}
                 {/* <Typography variant='h6' role='presentation'>
                     <Button variant="contained" onClick={handleClick} >Horarios</Button>

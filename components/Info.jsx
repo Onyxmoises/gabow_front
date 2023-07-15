@@ -7,7 +7,6 @@ import InfoMap from './InfoMap';
 import InfoEdi from './InfoEdi';
 
 const Info = ({ tipo, openInfo, closeInfo, info }) => {
-
     const [isOpen, setIsOpen] = useState(false)
     const isDesktop = useMediaQuery('(min-width:960px)');
 
@@ -35,7 +34,6 @@ const Info = ({ tipo, openInfo, closeInfo, info }) => {
                 <Box className={styles.box}>
                     <hr />
                     <Typography variant='h4'>GABOW</Typography>
-                    <hr />
                     <Typography variant='h6' role='presentation'>
                         {tipo == "map" &&
                             <InfoMap info={info} />
